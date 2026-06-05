@@ -48,19 +48,12 @@ python3 -m http.server 8080
 
 ## 部署 · GitHub Pages
 
-### 方式 A：GitHub Actions（推荐，已配置）
+1. push 到 GitHub 后，进入 **Settings → Pages**
+2. **Build and deployment → Source**：**Deploy from a branch**
+3. **Branch**：`main` · **Folder**：`/ (root)`
+4. 点 **Save**，等待 1–2 分钟
 
-1. 将本仓库 push 到 GitHub
-2. 进入 **Settings → Pages**
-3. **Source** 选择 **GitHub Actions**
-4. push 到 `main` 分支后自动部署
-
-### 方式 B：静态分支
-
-1. **Settings → Pages**
-2. **Source**：Deploy from branch
-3. Branch：`main` · Folder：`/ (root)`
-4. Save
+预览：`https://mattiajin.github.io/recruitos-dashboard/`
 
 ### 其他平台
 
