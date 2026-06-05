@@ -1,0 +1,3769 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recruiting Vendor & Analytics System - Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #2563eb;
+      --soft: #eef4ff;
+      --shadow: 0 1px 3px rgba(15, 23, 42, .04);
+
+      --ds-text: #111827;
+      --ds-text-secondary: #4B5563;
+      --ds-text-muted: #9CA3AF;
+      --ds-slate: #64748B;
+      --ds-radius-card: 16px;
+      --ds-radius-sm: 10px;
+      --ds-font-display: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      --ds-font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      --ds-text-xs: 12px;
+      --ds-text-sm: 13px;
+      --ds-text-base: 14px;
+      --ds-text-md: 15px;
+      --ds-text-lg: 16px;
+      --ds-text-xl: 20px;
+      --ds-text-2xl: 26px;
+      --ds-text-3xl: 30px;
+      --ds-text-4xl: 32px;
+      --ds-space-1: 4px;
+      --ds-space-2: 8px;
+      --ds-space-3: 12px;
+      --ds-space-4: 16px;
+      --ds-space-5: 20px;
+      --ds-space-6: 28px;
+      --ds-sidebar-width: 252px;
+      --ds-control-md: 36px;
+      --ds-pad-page-y: 20px;
+      --ds-pad-page-x: 24px;
+      --ds-gap-page: 16px;
+      --ds-gap-grid: 14px;
+      --ds-pad-card: 18px 20px;
+      --ds-pad-kpi: 14px 16px 16px;
+      --ds-chart-size: 120px;
+      /* Bento container heights */
+      --ds-card-head-h: 44px;
+      --ds-table-row-h: 40px;
+      --ds-panel-content-min: 248px;
+      --ds-panel-row-1-h: 360px;
+      --ds-panel-row-2-h: 328px;
+    }
+
+    /* Palette tokens — near-white surfaces, single-hue chart ramps + one accent */
+    [data-palette="vivid"],
+    :root {
+      --ds-smart-blue: #4B7FEE;
+      --ds-smart-blue-light: #729AF2;
+      --ds-smart-blue-dark: #3568D9;
+      --ds-smart-blue-tint: #F2F6FC;
+      --ds-surface: #FFFFFF;
+      --ds-bg: #FFFFFF;
+      --ds-border: #E8EEF5;
+      --ds-teal: #0D9488;
+      --ds-teal-tint: #F4FAF8;
+      --ds-amber: #D97706;
+      --ds-amber-tint: #FDFAF4;
+      --ds-coral: #E11D48;
+      --ds-coral-tint: #FDF5F7;
+      --ds-chart-1: #4B7FEE;
+      --ds-chart-2: #6B96F1;
+      --ds-chart-3: #93B3F5;
+      --ds-chart-4: #BCCFF9;
+      --ds-chart-accent: #EA6C2E;
+      --ds-chart-accent-light: #F08F5C;
+      --ds-chart-grad-2-from: #4B7FEE;
+      --ds-chart-grad-2-to: #729AF2;
+      --ds-chart-grad-3-from: #729AF2;
+      --ds-chart-grad-3-to: #A8C2F6;
+      --ds-chart-grad-4-from: #A8C2F6;
+      --ds-chart-grad-4-to: #D2E0FA;
+      --ds-well-from: #F6F9FD;
+      --ds-well-mid: #FAFCFE;
+      --ds-well-to: #FDFEFE;
+      --ds-well-hole: #FCFDFE;
+      --ds-chip-from: #F6F9FD;
+      --ds-chip-to: #FCFDFE;
+      --ds-chip-border: #E8EEF5;
+      --ds-welcome-from: #F5F8FF;
+      --ds-welcome-mid: #EAF1FF;
+      --ds-welcome-to: #F5F8FF;
+      --ds-welcome-border: #E0E9F4;
+      --ds-welcome-border-hover: #CBD8EA;
+      --ds-welcome-shadow: rgba(75, 127, 238, 0.08);
+      --ds-welcome-shadow-hover: rgba(75, 127, 238, 0.12);
+      --ds-welcome-icon: #3568D9;
+      --ds-welcome-icon-bg: linear-gradient(145deg, #EEF4FF 0%, #DBEAFE 55%, #BFDBFE 100%);
+      --ds-welcome-icon-border: #BFDBFE;
+      --ds-welcome-text: #1E293B;
+      --ds-welcome-summary: #475569;
+      --ds-welcome-emphasis: #1D4ED8;
+      --ds-shadow: none;
+    }
+    [data-palette="sunset"] {
+      --ds-smart-blue: #E85D0E;
+      --ds-smart-blue-light: #F97316;
+      --ds-smart-blue-dark: #C2410C;
+      --ds-smart-blue-tint: #FDF6F0;
+      --ds-surface: #FFFFFF;
+      --ds-bg: #FDF9F6;
+      --ds-border: #EFE4D9;
+      --ds-teal: #0D9488;
+      --ds-teal-tint: #F4FAF9;
+      --ds-amber: #B45309;
+      --ds-amber-tint: #FDFAF5;
+      --ds-coral: #E11D48;
+      --ds-coral-tint: #FDF5F7;
+      --ds-chart-1: #E85D0E;
+      --ds-chart-2: #F97316;
+      --ds-chart-3: #FB923C;
+      --ds-chart-4: #FDBA74;
+      --ds-chart-accent: #DB2777;
+      --ds-chart-accent-light: #EC5AA0;
+      --ds-chart-grad-2-from: #E85D0E;
+      --ds-chart-grad-2-to: #F97316;
+      --ds-chart-grad-3-from: #F97316;
+      --ds-chart-grad-3-to: #FBAB68;
+      --ds-chart-grad-4-from: #FBAB68;
+      --ds-chart-grad-4-to: #FDD0A5;
+      --ds-well-from: #FCF7F2;
+      --ds-well-mid: #FDF9F6;
+      --ds-well-to: #FEFDFB;
+      --ds-well-hole: #FEFCFA;
+      --ds-chip-from: #FCF7F2;
+      --ds-chip-to: #FEFCFA;
+      --ds-chip-border: #EFE4D9;
+      --ds-welcome-from: #FFFCF7;
+      --ds-welcome-mid: #FFF6EB;
+      --ds-welcome-to: #FFF9F2;
+      --ds-welcome-border: #F3E4D4;
+      --ds-welcome-border-hover: #EBD5BC;
+      --ds-welcome-shadow: rgba(232, 93, 14, 0.08);
+      --ds-welcome-shadow-hover: rgba(232, 93, 14, 0.12);
+      --ds-welcome-icon: #C2410C;
+      --ds-welcome-icon-bg: linear-gradient(145deg, #FEF3C7 0%, #FFEDD5 55%, #FDE68A 100%);
+      --ds-welcome-icon-border: #F5D9A8;
+      --ds-welcome-text: #3D3429;
+      --ds-welcome-summary: #6B5F52;
+      --ds-welcome-emphasis: #92400E;
+      --ds-shadow: none;
+    }
+    [data-palette="classic"] {
+      --ds-smart-blue: #1A56DB;
+      --ds-smart-blue-light: #3D72E4;
+      --ds-smart-blue-dark: #1344AE;
+      --ds-smart-blue-tint: #F3F5F9;
+      --ds-surface: #FFFFFF;
+      --ds-bg: #FAFBFD;
+      --ds-border: #EAECF1;
+      --ds-teal: #0F766E;
+      --ds-teal-tint: #F4FAF9;
+      --ds-amber: #B45309;
+      --ds-amber-tint: #FDFAF5;
+      --ds-coral: #DC2626;
+      --ds-coral-tint: #FDF6F5;
+      --ds-chart-1: #1A56DB;
+      --ds-chart-2: #3D72E4;
+      --ds-chart-3: #6B94EB;
+      --ds-chart-4: #A3BAF0;
+      --ds-chart-accent: #D97706;
+      --ds-chart-accent-light: #F0A04A;
+      --ds-chart-grad-2-from: #1A56DB;
+      --ds-chart-grad-2-to: #3D72E4;
+      --ds-chart-grad-3-from: #3D72E4;
+      --ds-chart-grad-3-to: #7AA0E8;
+      --ds-chart-grad-4-from: #7AA0E8;
+      --ds-chart-grad-4-to: #B8CAF2;
+      --ds-well-from: #F5F7FA;
+      --ds-well-mid: #FAFBFD;
+      --ds-well-to: #FDFDFE;
+      --ds-well-hole: #FCFCFD;
+      --ds-chip-from: #F5F7FA;
+      --ds-chip-to: #FCFCFD;
+      --ds-chip-border: #EAECF1;
+      --ds-welcome-from: #FAFBFD;
+      --ds-welcome-mid: #F5F7FA;
+      --ds-welcome-to: #FAFBFD;
+      --ds-welcome-border: #E2E6EE;
+      --ds-welcome-border-hover: #CDD4E0;
+      --ds-welcome-shadow: rgba(26, 86, 219, 0.07);
+      --ds-welcome-shadow-hover: rgba(26, 86, 219, 0.11);
+      --ds-welcome-icon: #1344AE;
+      --ds-welcome-icon-bg: linear-gradient(145deg, #EFF4FF 0%, #DBEAFE 55%, #BFDBFE 100%);
+      --ds-welcome-icon-border: #BFDBFE;
+      --ds-welcome-text: #1E293B;
+      --ds-welcome-summary: #475569;
+      --ds-welcome-emphasis: #1A56DB;
+      --ds-shadow: none;
+    }
+    [data-palette="bloom"] {
+      --ds-smart-blue: #7C3AED;
+      --ds-smart-blue-light: #9458F0;
+      --ds-smart-blue-dark: #6D28D9;
+      --ds-smart-blue-tint: #F7F4FC;
+      --ds-surface: #FFFFFF;
+      --ds-bg: #FCFAFE;
+      --ds-border: #EFE9F5;
+      --ds-teal: #0D9488;
+      --ds-teal-tint: #F4FAF9;
+      --ds-amber: #B45309;
+      --ds-amber-tint: #FDFAF5;
+      --ds-coral: #DB2777;
+      --ds-coral-tint: #FDF5F9;
+      --ds-chart-1: #7C3AED;
+      --ds-chart-2: #9458F0;
+      --ds-chart-3: #B080F4;
+      --ds-chart-4: #CDB0F8;
+      --ds-chart-accent: #DB2777;
+      --ds-chart-accent-light: #EC5AA0;
+      --ds-chart-grad-2-from: #7C3AED;
+      --ds-chart-grad-2-to: #9458F0;
+      --ds-chart-grad-3-from: #9458F0;
+      --ds-chart-grad-3-to: #B88AF5;
+      --ds-chart-grad-4-from: #B88AF5;
+      --ds-chart-grad-4-to: #D9BDF9;
+      --ds-well-from: #F8F5FC;
+      --ds-well-mid: #FCFAFE;
+      --ds-well-to: #FEFDFF;
+      --ds-well-hole: #FDFCFE;
+      --ds-chip-from: #F8F5FC;
+      --ds-chip-to: #FDFCFE;
+      --ds-chip-border: #EFE9F5;
+      --ds-welcome-from: #FDFCFE;
+      --ds-welcome-mid: #F8F4FC;
+      --ds-welcome-to: #FDFCFE;
+      --ds-welcome-border: #E9E0F2;
+      --ds-welcome-border-hover: #D8CBE8;
+      --ds-welcome-shadow: rgba(124, 58, 237, 0.07);
+      --ds-welcome-shadow-hover: rgba(124, 58, 237, 0.11);
+      --ds-welcome-icon: #6D28D9;
+      --ds-welcome-icon-bg: linear-gradient(145deg, #F5F0FF 0%, #EDE9FE 55%, #DDD6FE 100%);
+      --ds-welcome-icon-border: #DDD6FE;
+      --ds-welcome-text: #2E1065;
+      --ds-welcome-summary: #5B4B6F;
+      --ds-welcome-emphasis: #7C3AED;
+      --ds-shadow: none;
+    }
+    [data-palette="mint"] {
+      --ds-smart-blue: #0E94B0;
+      --ds-smart-blue-light: #14B8D4;
+      --ds-smart-blue-dark: #0C7A92;
+      --ds-smart-blue-tint: #F2FAF9;
+      --ds-surface: #FFFFFF;
+      --ds-bg: #FAFDFC;
+      --ds-border: #E6F2EE;
+      --ds-teal: #059669;
+      --ds-teal-tint: #F3FAF7;
+      --ds-amber: #B45309;
+      --ds-amber-tint: #FDFAF5;
+      --ds-coral: #E11D48;
+      --ds-coral-tint: #FDF5F7;
+      --ds-chart-1: #0E94B0;
+      --ds-chart-2: #14B8D4;
+      --ds-chart-3: #4ECAE0;
+      --ds-chart-4: #88DBEC;
+      --ds-chart-accent: #16A34A;
+      --ds-chart-accent-light: #4ADE80;
+      --ds-chart-grad-2-from: #0E94B0;
+      --ds-chart-grad-2-to: #14B8D4;
+      --ds-chart-grad-3-from: #14B8D4;
+      --ds-chart-grad-3-to: #5DD4E6;
+      --ds-chart-grad-4-from: #5DD4E6;
+      --ds-chart-grad-4-to: #A0E6F0;
+      --ds-well-from: #F4FAF8;
+      --ds-well-mid: #FAFDFC;
+      --ds-well-to: #FDFEFE;
+      --ds-well-hole: #FCFEFD;
+      --ds-chip-from: #F4FAF8;
+      --ds-chip-to: #FCFEFD;
+      --ds-chip-border: #E6F2EE;
+      --ds-welcome-from: #FAFDFC;
+      --ds-welcome-mid: #F2FAF8;
+      --ds-welcome-to: #FAFDFC;
+      --ds-welcome-border: #D9EDE6;
+      --ds-welcome-border-hover: #C4E3D8;
+      --ds-welcome-shadow: rgba(14, 148, 176, 0.07);
+      --ds-welcome-shadow-hover: rgba(14, 148, 176, 0.11);
+      --ds-welcome-icon: #0C7A92;
+      --ds-welcome-icon-bg: linear-gradient(145deg, #ECFDF5 0%, #D1FAE5 55%, #A7F3D0 100%);
+      --ds-welcome-icon-border: #A7F3D0;
+      --ds-welcome-text: #134E4A;
+      --ds-welcome-summary: #4B6B63;
+      --ds-welcome-emphasis: #0E94B0;
+      --ds-shadow: none;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .page {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      flex-shrink: 0;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    header h1 { font-size: var(--ds-text-lg); margin: 0; }
+    .header-meta {
+      font-size: var(--ds-text-sm);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .theme-updated .header-meta {
+      font-family: var(--ds-font-body);
+      color: var(--ds-text-muted);
+    }
+    .layout {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: var(--ds-sidebar-width) minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+    }
+    .sidebar {
+      grid-column: 1;
+      grid-row: 1;
+      border-right: 1px solid var(--line);
+      background: #fff;
+      padding: 14px 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .sidebar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-height: 0;
+      flex: 1;
+    }
+    .sidebar-panel--updated {
+      gap: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .sidebar-panel[hidden] { display: none !important; }
+    .layout > main {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+    }
+    .nav-item {
+      display: block;
+      color: #374151;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: var(--ds-text-base);
+      cursor: pointer;
+      user-select: none;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      text-align: left;
+      width: 100%;
+    }
+    .nav-item.active {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .nav-item:not(.active):hover {
+      background: #f3f4f6;
+      color: #111827;
+    }
+    .nav-item:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+      outline-offset: 1px;
+    }
+    main {
+      min-height: 0;
+      padding: 12px 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ds-space-4);
+      flex-shrink: 0;
+    }
+    .section-head__end {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .ds-lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: var(--ds-control-md);
+      padding: 0 10px;
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-surface);
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-sm);
+      font-weight: 600;
+      color: var(--ds-text-secondary);
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
+    }
+    .theme-updated .ds-lang-toggle:hover {
+      background: var(--ds-smart-blue-tint);
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 25%, var(--ds-border));
+      color: var(--ds-smart-blue);
+    }
+    .ds-lang-toggle:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--ds-smart-blue) 45%, transparent);
+      outline-offset: 2px;
+    }
+    .view-tabs {
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .view-tab {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: var(--ds-text-base);
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .view-tab:hover { color: var(--text); background: #f3f4f6; }
+    .view-tab.active {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .view-panel {
+      display: none;
+      flex: 1;
+      min-height: 0;
+      min-width: 0;
+      width: 100%;
+      flex-direction: column;
+      gap: var(--ds-gap-page);
+    }
+    .view-panel.active {
+      display: flex;
+      flex: 1 1 0;
+      min-height: 0;
+    }
+    #view-before.active {
+      overflow: hidden;
+    }
+    #view-updated.active {
+      flex: 1 1 0;
+      height: 0;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      align-items: stretch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    #view-updated.active::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    .toolbar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .display-only,
+    .display-only * {
+      pointer-events: none;
+      cursor: default;
+    }
+    .small-input, .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 5px 8px;
+      font-size: var(--ds-text-base);
+      color: #374151;
+    }
+    .btn.secondary {
+      background: #fff;
+      color: #374151;
+      border-color: var(--line);
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      flex-shrink: 0;
+      width: 100%;
+      min-width: 0;
+    }
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 10px 12px;
+    }
+    .metric .label { color: var(--muted); font-size: var(--ds-text-base); }
+    .metric .value { font-size: var(--ds-text-2xl); font-weight: 700; margin-top: 4px; }
+    .panels {
+      flex: 1;
+      min-height: 0;
+      min-width: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 10px 12px;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: var(--ds-text-lg);
+      flex-shrink: 0;
+    }
+    .card-body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-body.table-wrap { align-items: stretch; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--ds-text-base);
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      padding: 8px 6px;
+      vertical-align: middle;
+    }
+    th { color: #4b5563; font-weight: 600; background: #fafafa; }
+    tr:last-child td { border-bottom: none; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: var(--ds-text-xs);
+      background: #f3f4f6;
+      color: #374151;
+      white-space: nowrap;
+    }
+    .tag.ok { background: #dcfce7; color: #166534; }
+    .tag.warn { background: #fef3c7; color: #92400e; }
+    .tag.info { background: #dbeafe; color: #1e40af; }
+    .pie-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+    .pie {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: conic-gradient(#2563eb 0 38%, #16a34a 38% 62%, #f59e0b 62% 80%, #ef4444 80% 100%);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .pie.cost {
+      background: conic-gradient(#2563eb 0 45%, #16a34a 45% 72%, #f59e0b 72% 100%);
+    }
+    .pie::after {
+      content: "";
+      position: absolute;
+      inset: 24px;
+      border-radius: 50%;
+      background: white;
+    }
+    .pie-legend {
+      margin-top: 4px;
+      font-size: var(--ds-text-xs);
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .auth-mask {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: repeating-linear-gradient(135deg, #f9fafb, #f9fafb 8px, #f3f4f6 8px, #f3f4f6 16px);
+      color: #6b7280;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      font-size: var(--ds-text-base);
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* ── Updated theme (global chrome) ── */
+    .theme-updated {
+      background: var(--ds-bg);
+      color: var(--ds-text);
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-base);
+      line-height: 1.45;
+    }
+    .theme-updated header { display: none; }
+    .theme-updated .sidebar {
+      border-right-color: var(--ds-border);
+      background: var(--ds-surface);
+      padding: 20px 14px 16px;
+      gap: 0;
+    }
+    .ds-sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 8px 18px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-sm);
+      transition: background .22s ease;
+    }
+    .theme-updated .ds-sidebar-brand {
+      pointer-events: auto;
+      cursor: default;
+    }
+    .theme-updated .ds-sidebar-brand:hover {
+      background: color-mix(in srgb, var(--ds-smart-blue) 6%, transparent);
+    }
+    .ds-sidebar-brand__mark {
+      width: var(--ds-control-md);
+      height: var(--ds-control-md);
+      border-radius: 10px;
+      background: linear-gradient(145deg, var(--ds-smart-blue-light) 0%, var(--ds-smart-blue) 52%, var(--ds-smart-blue-dark) 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ds-text-xl);
+      flex-shrink: 0;
+      transition: transform .28s cubic-bezier(.22, 1, .36, 1);
+    }
+    .theme-updated .ds-sidebar-brand:hover .ds-sidebar-brand__mark {
+      transform: scale(1.08) rotate(-3deg);
+    }
+    .ds-sidebar-brand__name {
+      font-family: var(--ds-font-display);
+      font-size: var(--ds-text-lg);
+      font-weight: 600;
+      color: var(--ds-text);
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color .22s ease;
+    }
+    .theme-updated .ds-sidebar-brand:hover .ds-sidebar-brand__name {
+      color: var(--ds-smart-blue-dark);
+    }
+    .ds-sidebar-brand__name span {
+      display: block;
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-xs);
+      font-weight: 400;
+      color: var(--ds-text-muted);
+      text-transform: none;
+      letter-spacing: normal;
+    }
+    .ds-nav-group-label {
+      font-size: var(--ds-text-xs);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ds-text-muted);
+      padding: 12px 12px 4px;
+    }
+    .ds-sidebar-user {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-bg);
+    }
+    .ds-sidebar-user__avatar {
+      width: var(--ds-control-md);
+      height: var(--ds-control-md);
+      border-radius: 50%;
+      background: var(--ds-chart-3);
+      color: #fff;
+      font-size: var(--ds-text-sm);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ds-sidebar-user__info { min-width: 0; }
+    .ds-sidebar-user__name {
+      font-size: var(--ds-text-base);
+      font-weight: 600;
+      color: var(--ds-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ds-sidebar-user__role {
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+    }
+    .ds-sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      min-height: 0;
+    }
+    .theme-updated .ds-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      color: var(--ds-text-secondary);
+      padding: 9px 12px;
+      border-radius: var(--ds-radius-sm);
+      font-size: var(--ds-text-base);
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      text-align: left;
+    }
+    .theme-updated .ds-nav-item i {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: var(--ds-text-lg);
+      flex-shrink: 0;
+      opacity: .82;
+      transition: opacity .18s ease, color .18s ease, background .18s ease, transform .18s ease;
+    }
+    .theme-updated .ds-nav-item.active {
+      background: var(--ds-smart-blue-tint);
+      color: var(--ds-smart-blue);
+      font-weight: 600;
+    }
+    .theme-updated .ds-nav-item.active i {
+      opacity: 1;
+      color: var(--ds-smart-blue);
+      background: color-mix(in srgb, var(--ds-smart-blue) 14%, transparent);
+    }
+    .theme-updated .ds-nav-item.active:hover {
+      background: color-mix(in srgb, var(--ds-smart-blue) 10%, var(--ds-smart-blue-tint));
+    }
+    .theme-updated .ds-nav-item.active:hover i {
+      transform: scale(1.04);
+    }
+    .theme-updated .ds-nav-item:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--ds-smart-blue) 45%, transparent);
+      outline-offset: 1px;
+    }
+    .theme-updated main {
+      padding: var(--ds-pad-page-y) var(--ds-pad-page-x);
+      gap: var(--ds-gap-page);
+    }
+    .ds-summary b { color: var(--ds-text); font-weight: 600; }
+    .theme-updated .view-tabs {
+      border-color: var(--ds-border);
+      background: var(--ds-surface);
+    }
+    .theme-updated .view-tab {
+      font-family: var(--ds-font-body);
+      color: var(--ds-text-secondary);
+    }
+    .theme-updated .view-tab:hover {
+      color: var(--ds-text);
+      background: var(--ds-bg);
+    }
+    .theme-updated .view-tab.active {
+      background: var(--ds-smart-blue-tint);
+      color: var(--ds-smart-blue);
+    }
+    .theme-updated .ds-input,
+    .theme-updated .ds-btn {
+      border: 1px solid var(--ds-border);
+      background: var(--ds-surface);
+      border-radius: var(--ds-radius-sm);
+      padding: 8px 12px;
+      min-height: var(--ds-control-md);
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-base);
+      color: var(--ds-text-secondary);
+    }
+    .theme-updated .ds-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .ds-btn--primary {
+      background: var(--ds-smart-blue) !important;
+      border-color: var(--ds-smart-blue) !important;
+      color: #fff !important;
+      font-weight: 600;
+      padding: 8px 16px !important;
+    }
+
+    /* Page intro — toolbar + welcome (separate hierarchy) */
+    .ds-page-head {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+      padding-bottom: 4px;
+    }
+    .ds-page-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .ds-welcome {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--ds-radius-card);
+      background: linear-gradient(118deg, var(--ds-welcome-from) 0%, var(--ds-welcome-mid) 52%, var(--ds-welcome-to) 100%);
+      border: 1px solid var(--ds-welcome-border);
+      transition: border-color .25s ease;
+    }
+    .ds-welcome:hover {
+      border-color: var(--ds-welcome-border-hover);
+    }
+    .ds-welcome__icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--ds-welcome-icon);
+      background: var(--ds-welcome-icon-bg);
+      border: 1px solid var(--ds-welcome-icon-border);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes ds-sun-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.04); }
+      }
+      .ds-welcome__icon {
+        animation: ds-sun-pulse 3.5s ease-in-out infinite;
+      }
+    }
+    .ds-welcome__text { min-width: 0; }
+    .ds-greeting {
+      margin: 0;
+      font-family: var(--ds-font-display);
+      font-size: var(--ds-text-xl);
+      font-weight: 600;
+      color: var(--ds-welcome-text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .ds-summary {
+      margin: 6px 0 0;
+      font-size: var(--ds-text-base);
+      color: var(--ds-welcome-summary);
+      line-height: 1.55;
+    }
+    .ds-welcome .ds-summary b {
+      color: var(--ds-welcome-emphasis);
+      font-weight: 600;
+    }
+    .ds-page-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .ds-icon-btn {
+      width: var(--ds-control-md);
+      height: var(--ds-control-md);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-surface);
+      color: var(--ds-text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ds-text-lg);
+    }
+
+    /* KPI cards — full layout */
+    .ds-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--ds-gap-grid);
+      flex-shrink: 0;
+      width: 100%;
+      min-width: 0;
+    }
+    .ds-metric {
+      position: relative;
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-card);
+      box-shadow: var(--ds-shadow);
+      padding: 10px 12px;
+      font-family: var(--ds-font-body);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      min-width: 0;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .display-only .ds-metric {
+      pointer-events: auto;
+    }
+    .ds-metric:hover {
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 28%, var(--ds-border));
+      transform: translateY(-1px);
+    }
+    .ds-metric__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--ds-control-md);
+      height: var(--ds-control-md);
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-smart-blue-tint);
+      color: var(--ds-smart-blue);
+      font-size: var(--ds-text-lg);
+      flex-shrink: 0;
+      transition: background .2s ease, transform .2s ease, color .2s ease;
+    }
+    .ds-metric:hover .ds-metric__icon {
+      background: color-mix(in srgb, var(--ds-smart-blue-tint) 85%, var(--ds-smart-blue-light));
+      transform: scale(1.06);
+      color: var(--ds-smart-blue-dark);
+    }
+    .ds-metric__label {
+      font-size: var(--ds-text-sm);
+      font-weight: 600;
+      color: var(--ds-text);
+      line-height: 1.2;
+    }
+    .ds-metric__content { min-width: 0; flex: 1; }
+    .ds-metric__value {
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-2xl);
+      font-weight: 700;
+      color: var(--ds-text);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-top: 4px;
+    }
+    .ds-metric__delta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+      flex-wrap: wrap;
+    }
+    .ds-card__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: var(--ds-card-head-h);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+    .ds-card__head .ds-card__title { margin: 0; }
+    .ds-card__sub {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-muted);
+      white-space: nowrap;
+    }
+    .ds-nav-badge {
+      margin-left: auto;
+      font-size: var(--ds-text-xs);
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .ds-nav-badge--coral { background: var(--ds-coral-tint); color: var(--ds-coral); }
+    .ds-nav-badge--amber { background: var(--ds-amber-tint); color: var(--ds-amber); }
+    .ds-chart-block {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+      min-height: 0;
+      flex: 1;
+    }
+    .ds-chart-well {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, var(--ds-well-from) 0%, var(--ds-well-mid) 50%, var(--ds-well-to) 100%);
+      border: 1px solid color-mix(in srgb, var(--ds-smart-blue) 10%, var(--ds-border));
+      border-radius: 12px;
+      padding: 12px;
+      width: min(100%, var(--ds-chart-size));
+      aspect-ratio: 1;
+      justify-self: center;
+      flex-shrink: 0;
+    }
+    .ds-donut {
+      position: relative;
+      width: 100%;
+      max-width: calc(var(--ds-chart-size) - 24px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+    }
+    .ds-donut__svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .ds-donut__track-ring circle {
+      fill: none;
+      stroke: color-mix(in srgb, var(--ds-border) 70%, var(--ds-surface));
+      stroke-width: 5.5;
+    }
+    .ds-donut__slice {
+      pointer-events: auto;
+    }
+    .ds-donut__slice path {
+      fill: none;
+      stroke-width: 5.5;
+      stroke-linecap: butt;
+      transition: stroke-width .34s cubic-bezier(.22, 1, .36, 1), opacity .28s ease;
+    }
+    .ds-donut__slice.is-hovered path {
+      stroke-width: 11.5;
+      opacity: 1;
+    }
+    .ds-donut__slice.is-dimmed path {
+      opacity: 0.32;
+    }
+    .ds-donut__center {
+      position: absolute;
+      inset: 20%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 4px;
+      pointer-events: none;
+      text-align: center;
+    }
+    .ds-donut__key {
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-md);
+      font-weight: 700;
+      color: var(--ds-text);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .ds-donut__key-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--ds-text-muted);
+      max-width: 92%;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .ds-legend-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .ds-legend-row {
+      display: grid;
+      grid-template-columns: 8px minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      gap: 1px 6px;
+      align-items: center;
+      padding: 4px 6px;
+      border-radius: 6px;
+      outline: none;
+    }
+    .ds-legend-row:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--ds-smart-blue) 45%, transparent);
+      outline-offset: 1px;
+    }
+    .ds-legend-row--key .ds-legend-name { font-weight: 600; color: var(--ds-text); }
+    .ds-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      grid-row: span 2;
+      align-self: center;
+    }
+    .ds-legend-name {
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ds-legend-val {
+      font-size: var(--ds-text-sm);
+      font-weight: 600;
+      color: var(--ds-text);
+      grid-row: span 2;
+      align-self: center;
+    }
+    .ds-legend-bar {
+      grid-column: 2 / 3;
+      height: 4px;
+      background: color-mix(in srgb, var(--ds-border) 72%, var(--ds-surface));
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .ds-legend-bar span {
+      display: block;
+      height: 100%;
+      border-radius: 99px;
+    }
+    .ds-legend-dot--accent { background: linear-gradient(135deg, var(--ds-chart-accent-light), var(--ds-chart-accent)); }
+    .ds-legend-dot--c2 { background: linear-gradient(90deg, var(--ds-chart-grad-2-from), var(--ds-chart-grad-2-to)); }
+    .ds-legend-dot--c3 { background: linear-gradient(90deg, var(--ds-chart-grad-3-from), var(--ds-chart-grad-3-to)); }
+    .ds-legend-dot--c4 { background: linear-gradient(90deg, var(--ds-chart-grad-4-from), var(--ds-chart-grad-4-to)); }
+    .ds-legend-bar__fill--accent { background: linear-gradient(90deg, var(--ds-chart-accent-light), var(--ds-chart-accent)); }
+    .ds-legend-bar__fill--c2 { background: linear-gradient(90deg, var(--ds-chart-grad-2-from), var(--ds-chart-grad-2-to)); }
+    .ds-legend-bar__fill--c3 { background: linear-gradient(90deg, var(--ds-chart-grad-3-from), var(--ds-chart-grad-3-to)); }
+    .ds-legend-bar__fill--c4 { background: linear-gradient(90deg, var(--ds-chart-grad-4-from), var(--ds-chart-grad-4-to)); }
+    .ds-card__body--cost {
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+    .ds-card__body--table {
+      align-items: stretch;
+      overflow-y: auto;
+    }
+    .ds-card--cost .ds-card__body {
+      min-height: 0;
+      overflow: hidden;
+      align-items: stretch;
+    }
+    .ds-cost-panel {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+    .ds-cost-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .ds-cost-chip {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 6px 8px;
+      background: linear-gradient(180deg, var(--ds-chip-from) 0%, var(--ds-chip-to) 100%);
+      border: 1px solid var(--ds-chip-border);
+      border-radius: var(--ds-radius-sm);
+      text-align: center;
+    }
+    .ds-cost-chip--locked {
+      background: var(--ds-bg);
+      border: 1px dashed color-mix(in srgb, var(--ds-text-muted) 28%, var(--ds-border));
+    }
+    .ds-cost-chip__val {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(var(--ds-text-lg) * 1.2);
+      font-size: var(--ds-text-lg);
+      font-weight: 600;
+      color: var(--ds-text);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .ds-cost-chip__val--locked {
+      color: var(--ds-text-muted);
+    }
+    .ds-cost-chip__val--locked i {
+      font-size: 20px;
+      line-height: 1;
+    }
+    .ds-cost-chip__lbl {
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .ds-cost-list {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 0;
+      overflow-y: auto;
+      justify-content: flex-start;
+    }
+    .ds-cost-item {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 8px 10px;
+      background: var(--ds-bg);
+      border-radius: var(--ds-radius-sm);
+    }
+    .ds-cost-item__head {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 8px;
+    }
+    .ds-cost-item__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .ds-cost-item:nth-child(1) .ds-cost-item__dot {
+      background: linear-gradient(135deg, var(--ds-chart-accent-light), var(--ds-chart-accent));
+    }
+    .ds-cost-item:nth-child(2) .ds-cost-item__dot {
+      background: linear-gradient(90deg, var(--ds-chart-grad-2-from), var(--ds-chart-grad-2-to));
+    }
+    .ds-cost-item:nth-child(3) .ds-cost-item__dot {
+      background: linear-gradient(90deg, var(--ds-chart-grad-3-from), var(--ds-chart-grad-3-to));
+    }
+    .ds-cost-item__label {
+      font-size: var(--ds-text-base);
+      font-weight: 600;
+      color: var(--ds-text);
+      min-width: 0;
+    }
+    .ds-cost-item__meta {
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .ds-cost-item__meta b {
+      color: var(--ds-text-secondary);
+      font-weight: 600;
+    }
+    .ds-cost-progress {
+      display: flex;
+      height: 6px;
+      background: color-mix(in srgb, var(--ds-border) 65%, var(--ds-surface));
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .ds-cost-progress__paid,
+    .ds-cost-progress__pending {
+      display: block;
+      height: 100%;
+      min-width: 0;
+    }
+    .ds-cost-item:nth-child(1) .ds-cost-progress__paid {
+      background: linear-gradient(90deg, var(--ds-chart-accent), var(--ds-chart-accent-light));
+    }
+    .ds-cost-item:nth-child(2) .ds-cost-progress__paid {
+      background: linear-gradient(90deg, var(--ds-chart-grad-2-from), var(--ds-chart-grad-2-to));
+    }
+    .ds-cost-item:nth-child(3) .ds-cost-progress__paid {
+      background: linear-gradient(90deg, var(--ds-chart-grad-3-from), var(--ds-chart-grad-3-to));
+    }
+    .ds-cost-progress__pending {
+      background: repeating-linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--ds-border) 55%, var(--ds-surface)) 0,
+        color-mix(in srgb, var(--ds-border) 55%, var(--ds-surface)) 3px,
+        color-mix(in srgb, var(--ds-border) 30%, var(--ds-surface)) 3px,
+        color-mix(in srgb, var(--ds-border) 30%, var(--ds-surface)) 6px
+      );
+    }
+    .ds-cost-auth {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 10px;
+      line-height: 1.35;
+      background: color-mix(in srgb, var(--ds-smart-blue) 4%, var(--ds-bg));
+      border-radius: var(--ds-radius-sm);
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+      flex-shrink: 0;
+    }
+    .ds-cost-auth i {
+      font-size: var(--ds-text-sm);
+      flex-shrink: 0;
+      color: var(--ds-text-secondary);
+    }
+    .ds-cost-auth__link {
+      color: var(--ds-smart-blue);
+      font-weight: 600;
+      cursor: default;
+    }
+    .ds-tag--coral { background: var(--ds-coral-tint); color: var(--ds-coral); }
+    .metric .note { font-size: var(--ds-text-xs); color: var(--muted); margin-top: 4px; }
+
+    /* Bento content cards */
+    .ds-panels {
+      flex: 1;
+      min-height: 0;
+      min-width: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--ds-gap-grid);
+    }
+    #view-updated .ds-panels {
+      flex: none;
+      grid-template-rows: minmax(var(--ds-panel-row-1-h), auto) minmax(var(--ds-panel-row-2-h), auto);
+      align-items: stretch;
+      gap: var(--ds-gap-grid);
+    }
+    #view-updated .ds-card--wide,
+    #view-updated .ds-card--share {
+      min-height: var(--ds-panel-row-1-h);
+      height: 100%;
+    }
+    #view-updated .ds-card--cost,
+    #view-updated .ds-card--breakdown {
+      min-height: var(--ds-panel-row-2-h);
+      height: 100%;
+    }
+    #view-updated .ds-card--wide .ds-card__body--table,
+    #view-updated .ds-card--share .ds-card__body,
+    #view-updated .ds-card--breakdown .ds-card__body,
+    #view-updated .ds-card--cost .ds-card__body {
+      flex: 1;
+      min-height: var(--ds-panel-content-min);
+    }
+    #view-updated .ds-card--share .ds-card__body,
+    #view-updated .ds-card--breakdown .ds-card__body {
+      align-items: stretch;
+      justify-content: stretch;
+      overflow: visible;
+    }
+    #view-updated .ds-card--wide .ds-table-shell {
+      flex: 1;
+      min-height: var(--ds-panel-content-min);
+      display: flex;
+      flex-direction: column;
+    }
+    #view-updated .ds-card--wide .ds-table-scroll {
+      flex: 1;
+      min-height: 0;
+    }
+    #view-updated .ds-card--share .ds-chart-block,
+    #view-updated .ds-card--breakdown .ds-chart-block {
+      flex: 1;
+      min-height: var(--ds-panel-content-min);
+      height: 100%;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: 12px;
+      align-items: center;
+    }
+    #view-updated .ds-card--cost .ds-cost-panel {
+      flex: 1;
+      min-height: var(--ds-panel-content-min);
+    }
+    #view-updated .ds-card--share .ds-chart-well,
+    #view-updated .ds-card--breakdown .ds-chart-well {
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 1;
+      height: auto;
+      max-height: 100%;
+      align-self: center;
+      justify-self: stretch;
+      padding: 10px;
+      flex-shrink: 0;
+      overflow: visible;
+    }
+    #view-updated .ds-card--share .ds-donut,
+    #view-updated .ds-card--breakdown .ds-donut {
+      width: 100%;
+      max-width: none;
+      aspect-ratio: 1;
+      margin: 0;
+    }
+    #view-updated .ds-card--share .ds-donut__key,
+    #view-updated .ds-card--breakdown .ds-donut__key {
+      font-size: var(--ds-text-xl);
+    }
+    #view-updated .ds-card--share .ds-donut__key-label,
+    #view-updated .ds-card--breakdown .ds-donut__key-label {
+      font-size: var(--ds-text-xs);
+    }
+    #view-updated .ds-card--share .ds-legend-list {
+      height: auto;
+      justify-content: flex-start;
+      gap: 4px;
+      align-self: center;
+    }
+    #view-updated .ds-card--breakdown .ds-legend-list {
+      height: auto;
+      justify-content: flex-start;
+      gap: 10px;
+      align-self: center;
+    }
+    #view-updated .ds-card--share .ds-legend-row,
+    #view-updated .ds-card--breakdown .ds-legend-row {
+      padding: 3px 0;
+    }
+    #view-updated .ds-card--share .ds-legend-bar,
+    #view-updated .ds-card--breakdown .ds-legend-bar {
+      height: 5px;
+    }
+    #view-updated .ds-card--cost .ds-card__body {
+      overflow: visible;
+    }
+    #view-updated .ds-cost-panel {
+      height: auto;
+      overflow: visible;
+    }
+    #view-updated .ds-cost-summary {
+      padding: 2px 0;
+    }
+    #view-updated .ds-cost-list {
+      flex: none;
+      overflow: visible;
+    }
+    #view-updated .ds-card__body--table {
+      overflow: visible;
+    }
+
+    /* Updated — motion & hover */
+    #view-updated .ds-page-toolbar,
+    #view-updated .ds-welcome,
+    #view-updated .ds-card,
+    #view-updated .ds-table tbody tr,
+    #view-updated .ds-legend-row,
+    #view-updated .ds-cost-item,
+    #view-updated .ds-cost-chip,
+    #view-updated .ds-chart-well,
+    #view-updated .ds-icon-btn,
+    #view-updated .ds-btn {
+      pointer-events: auto;
+    }
+    .theme-updated .ds-nav-item,
+    .theme-updated .ds-sidebar-user {
+      pointer-events: auto;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes ds-fade-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes ds-bar-in {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+      }
+      #view-updated .ds-page-toolbar { animation: ds-fade-up .35s ease both; }
+      #view-updated .ds-welcome { animation: ds-fade-up .4s ease .06s both; }
+      #view-updated .ds-metrics .ds-metric:nth-child(1) { animation: ds-fade-up .45s ease .05s both; }
+      #view-updated .ds-metrics .ds-metric:nth-child(2) { animation: ds-fade-up .45s ease .1s both; }
+      #view-updated .ds-metrics .ds-metric:nth-child(3) { animation: ds-fade-up .45s ease .15s both; }
+      #view-updated .ds-metrics .ds-metric:nth-child(4) { animation: ds-fade-up .45s ease .2s both; }
+      #view-updated .ds-panels .ds-card:nth-child(1) { animation: ds-fade-up .5s ease .18s both; }
+      #view-updated .ds-panels .ds-card:nth-child(2) { animation: ds-fade-up .5s ease .24s both; }
+      #view-updated .ds-panels .ds-card:nth-child(3) { animation: ds-fade-up .5s ease .3s both; }
+      #view-updated .ds-panels .ds-card:nth-child(4) { animation: ds-fade-up .5s ease .36s both; }
+      #view-updated .ds-legend-bar span,
+      #view-updated .ds-cost-progress__paid {
+        transform-origin: left center;
+        animation: ds-bar-in .65s cubic-bezier(.22, 1, .36, 1) .45s both;
+      }
+    }
+    #view-updated .ds-card {
+      transition: border-color .2s ease, transform .2s ease;
+    }
+    #view-updated .ds-card:hover {
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 22%, var(--ds-border));
+    }
+    #view-updated .ds-table tbody tr {
+      transition: background .15s ease;
+    }
+    #view-updated .ds-table--performance tbody tr:hover td {
+      background: color-mix(in srgb, var(--ds-smart-blue) 6%, var(--ds-surface));
+    }
+    #view-updated .ds-table--performance tbody tr:hover td:first-child {
+      color: var(--ds-smart-blue);
+    }
+    #view-updated .ds-table:not(.ds-table--performance) tbody tr:hover td {
+      background: color-mix(in srgb, var(--ds-smart-blue) 6%, var(--ds-bg));
+    }
+    #view-updated .ds-table:not(.ds-table--performance) tbody tr:hover td:first-child {
+      font-weight: 600;
+      color: var(--ds-smart-blue);
+    }
+    #view-updated .ds-legend-row {
+      border-radius: 8px;
+      transition: background .15s ease;
+    }
+    #view-updated .ds-legend-row:hover {
+      background: var(--ds-bg);
+    }
+    #view-updated .ds-legend-bar span {
+      transition: opacity .2s ease;
+    }
+    #view-updated .ds-legend-row:hover .ds-legend-bar span {
+      opacity: .92;
+    }
+    #view-updated .ds-chart-well {
+      transition: border-color .2s ease;
+    }
+    #view-updated .ds-card:hover .ds-chart-well {
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 18%, var(--ds-border));
+    }
+    #view-updated .ds-donut--interactive {
+      overflow: visible;
+    }
+    #view-updated .ds-legend-row.is-slice-hovered {
+      background: var(--ds-bg);
+    }
+    #view-updated .ds-cost-chip {
+      transition: border-color .15s ease;
+    }
+    #view-updated .ds-cost-chip:hover {
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 20%, var(--ds-chip-border));
+    }
+    #view-updated .ds-cost-item {
+      transition: background .15s ease;
+    }
+    #view-updated .ds-cost-item:hover {
+      background: color-mix(in srgb, var(--ds-smart-blue) 6%, var(--ds-surface));
+    }
+    #view-updated .ds-icon-btn {
+      cursor: default;
+      transition: border-color .15s ease, background .15s ease, color .15s ease, transform .15s ease;
+    }
+    #view-updated .ds-icon-btn:hover {
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 30%, var(--ds-border));
+      background: var(--ds-smart-blue-tint);
+      color: var(--ds-smart-blue);
+      transform: scale(1.05);
+    }
+    #view-updated .ds-btn {
+      cursor: default;
+      transition: background .15s ease, border-color .15s ease, filter .15s ease;
+    }
+    #view-updated .ds-btn--primary:hover {
+      filter: brightness(1.06);
+    }
+    .theme-updated .ds-nav-item {
+      transition: background .18s ease, color .18s ease;
+    }
+    .theme-updated .ds-nav-item:not(.active):hover {
+      background: color-mix(in srgb, var(--ds-smart-blue) 5%, var(--ds-bg));
+      color: var(--ds-text);
+    }
+    .theme-updated .ds-nav-item:not(.active):hover i {
+      opacity: 1;
+      color: var(--ds-smart-blue-dark);
+      background: color-mix(in srgb, var(--ds-smart-blue) 8%, transparent);
+      transform: scale(1.03);
+    }
+    .theme-updated .ds-sidebar-user {
+      transition: background .15s ease;
+      cursor: default;
+    }
+    .theme-updated .ds-sidebar-user:hover {
+      background: color-mix(in srgb, var(--ds-smart-blue) 6%, var(--ds-bg));
+    }
+    #view-updated .ds-tag {
+      transition: transform .15s ease;
+    }
+    #view-updated .ds-table tbody tr:hover .ds-tag,
+    #view-updated .ds-metric:hover .ds-tag {
+      transform: scale(1.03);
+    }
+
+    .ds-card {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-card);
+      box-shadow: var(--ds-shadow);
+      padding: var(--ds-pad-card);
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: var(--ds-font-body);
+    }
+    .ds-card--wide { grid-column: 1; grid-row: 1; }
+    .ds-card--share { grid-column: 2; grid-row: 1; }
+    .ds-card--cost { grid-column: 1; grid-row: 2; }
+    .ds-card--breakdown { grid-column: 2; grid-row: 2; }
+    .ds-card--share .ds-card__body,
+    .ds-card--breakdown .ds-card__body {
+      align-items: stretch;
+      justify-content: stretch;
+      overflow: hidden;
+      min-height: 0;
+    }
+    .ds-card__title {
+      margin: 0;
+      font-family: var(--ds-font-display);
+      font-size: var(--ds-text-lg);
+      font-weight: 600;
+      color: var(--ds-text);
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .ds-card__body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+    }
+    .ds-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--ds-text-base);
+    }
+    .ds-table th, .ds-table td {
+      border-bottom: 1px solid var(--ds-border);
+      text-align: left;
+      padding: 10px 10px;
+      vertical-align: middle;
+    }
+    .ds-table td {
+      color: var(--ds-text);
+      font-weight: 500;
+    }
+    .ds-table th {
+      color: var(--ds-text-secondary);
+      font-weight: 600;
+      font-size: var(--ds-text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      background: transparent;
+      border-bottom-color: var(--ds-border);
+    }
+    .ds-table tbody tr:hover td { background: var(--ds-bg); }
+    .ds-table tr:last-child td { border-bottom: none; }
+    .ds-table-shell {
+      width: 100%;
+      border-radius: 12px;
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      overflow: hidden;
+      min-width: 0;
+    }
+    .ds-table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
+    }
+    .ds-table-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .ds-table-scroll::-webkit-scrollbar-thumb {
+      background: color-mix(in srgb, var(--ds-border) 55%, var(--ds-text-muted));
+      border-radius: 99px;
+    }
+    .ds-table--performance th:first-child,
+    .ds-table--performance td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+    }
+    .ds-table--performance thead th:first-child {
+      z-index: 3;
+      background: var(--ds-smart-blue-tint);
+    }
+    .ds-table--performance tbody td:first-child {
+      background: var(--ds-surface);
+    }
+    .ds-table--performance tbody tr:hover td:first-child {
+      background: color-mix(in srgb, var(--ds-smart-blue) 6%, var(--ds-surface));
+    }
+    .ds-table--performance.is-scrolled th:first-child,
+    .ds-table--performance.is-scrolled td:first-child {
+      box-shadow: 2px 0 6px -2px rgba(17, 24, 39, 0.05);
+    }
+    .ds-table--performance {
+      border-collapse: collapse;
+    }
+    .ds-table--performance thead th {
+      height: var(--ds-table-row-h);
+      padding: 0 12px;
+      background: var(--ds-smart-blue-tint);
+      border-bottom: 1px solid var(--ds-border);
+      color: var(--ds-text-muted);
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+    }
+    .ds-table--performance tbody td {
+      height: var(--ds-table-row-h);
+      padding: 0 12px;
+      font-variant-numeric: tabular-nums;
+      background: transparent;
+      border-bottom: 1px solid var(--ds-border);
+      transition: background .15s ease;
+      vertical-align: middle;
+    }
+    .ds-table--performance tbody td:first-child {
+      font-weight: 600;
+    }
+    .ds-table--performance tbody td:last-child {
+      text-align: right;
+    }
+    .ds-table--performance tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .ds-table--performance th:nth-child(n+2),
+    .ds-table--performance td:nth-child(n+2) {
+      text-align: right;
+    }
+    .ds-table--performance th:first-child,
+    .ds-table--performance td:first-child {
+      text-align: left;
+      padding-left: 14px;
+    }
+    .ds-table--performance th:last-child,
+    .ds-table--performance td:last-child {
+      padding-right: 14px;
+    }
+    .ds-table--performance td:nth-child(4) {
+      font-weight: 600;
+    }
+    .ds-table--performance td:nth-child(5) {
+      color: var(--ds-text-secondary);
+      font-weight: 500;
+    }
+    .ds-table--performance .ds-table__conv--peak {
+      color: var(--ds-smart-blue);
+      font-weight: 700;
+    }
+    .ds-table--performance .ds-tag {
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .ds-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: var(--ds-text-xs);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .ds-tag--teal { background: var(--ds-teal-tint); color: var(--ds-teal); }
+    .ds-tag--amber { background: var(--ds-amber-tint); color: var(--ds-amber); }
+    .ds-tag--blue { background: var(--ds-smart-blue-tint); color: var(--ds-smart-blue); }
+    .ds-auth-mask {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--ds-bg);
+      color: var(--ds-text-muted);
+      border: 1px dashed var(--ds-border);
+      border-radius: var(--ds-radius-sm);
+      font-size: var(--ds-text-base);
+      padding: 10px;
+    }
+    .ds-auth-mask i { color: var(--ds-slate); }
+
+    /* Design System documentation — scroll on the panel, not the inner wrapper */
+    #view-design-system.active {
+      flex: 1 1 0;
+      height: 0;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      align-items: stretch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    #view-design-system.active::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    .ds-docs {
+      width: 100%;
+      flex: none;
+      padding: 2px 4px 32px;
+    }
+    #view-design-system .ds-docs .ds-btn,
+    #view-design-system .ds-docs input,
+    #view-design-system .ds-docs button {
+      pointer-events: none;
+      cursor: default;
+    }
+    .ds-docs__header {
+      margin-bottom: var(--ds-space-3);
+    }
+    .ds-docs__title {
+      margin: 0;
+      font-family: var(--ds-font-display);
+      font-size: var(--ds-text-xl);
+      font-weight: 600;
+      color: var(--ds-text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .ds-docs__sub {
+      margin: 4px 0 0;
+      font-size: var(--ds-text-base);
+      color: var(--ds-text-muted);
+    }
+    .ds-docs__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--ds-space-3);
+    }
+    .ds-doc-card {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-card);
+      box-shadow: var(--ds-shadow);
+      padding: var(--ds-space-4);
+      min-width: 0;
+    }
+    .ds-doc-card--wide { grid-column: span 3; }
+    .ds-doc-card--half { grid-column: span 2; }
+    .ds-doc-card__label {
+      font-size: var(--ds-text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ds-text-muted);
+      margin: 0 0 var(--ds-space-3);
+    }
+    .ds-doc-card__text {
+      margin: 0;
+      font-size: var(--ds-text-base);
+      color: var(--ds-text-secondary);
+      line-height: 1.55;
+    }
+    .ds-doc-card__text + .ds-doc-card__text { margin-top: var(--ds-space-2); }
+    .ds-doc-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+    .ds-doc-list li {
+      font-size: var(--ds-text-base);
+      color: var(--ds-text-secondary);
+      line-height: 1.45;
+      padding-left: 12px;
+      position: relative;
+    }
+    .ds-doc-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--ds-smart-blue);
+    }
+    .ds-swatches {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--ds-space-2);
+    }
+    .ds-swatches--row { grid-template-columns: repeat(4, 1fr); }
+    .ds-swatches--chart-ramp { grid-template-columns: repeat(5, 1fr); }
+    .ds-swatch {
+      border-radius: var(--ds-radius-sm);
+      padding: 9px 10px;
+      font-size: var(--ds-text-xs);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .ds-swatch--light { color: var(--ds-text); border: 1px solid var(--ds-border); }
+    .ds-swatch span { display: block; font-weight: 400; opacity: .85; font-size: var(--ds-text-xs); margin-top: 2px; }
+    .ds-swatch--blue { background: var(--ds-smart-blue); }
+    .ds-swatch--brand-light { background: var(--ds-smart-blue-light); }
+    .ds-swatch--brand-dark { background: var(--ds-smart-blue-dark); }
+    .ds-swatch--tint { background: var(--ds-smart-blue-tint); color: var(--ds-smart-blue); }
+    .ds-swatch--chart-1 { background: var(--ds-chart-1); }
+    .ds-swatch--chart-2 { background: var(--ds-chart-2); }
+    .ds-swatch--chart-3 { background: var(--ds-chart-3); color: #1e3a5f; }
+    .ds-swatch--chart-4 { background: var(--ds-chart-4); color: #1e3a5f; }
+    .ds-swatch--chart-accent { background: linear-gradient(135deg, var(--ds-chart-accent-light), var(--ds-chart-accent)); }
+    .ds-swatch--bg { background: var(--ds-bg); }
+    .ds-swatch--surface { background: var(--ds-surface); }
+    .ds-swatch--teal { background: var(--ds-teal); }
+    .ds-swatch--amber { background: var(--ds-amber); }
+    .ds-swatch--coral { background: var(--ds-coral); }
+    .ds-type-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: var(--ds-space-2);
+      align-items: baseline;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--ds-border);
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+    }
+    .ds-type-row:last-child { border-bottom: none; }
+    .ds-type-sample--display { font-family: var(--ds-font-body); font-size: var(--ds-text-3xl); font-weight: 700; color: var(--ds-text); }
+    .ds-type-sample--heading { font-family: var(--ds-font-display); font-size: var(--ds-text-xl); font-weight: 600; color: var(--ds-text); text-transform: uppercase; letter-spacing: 0.04em; }
+    .ds-type-sample--title { font-family: var(--ds-font-display); font-size: var(--ds-text-lg); font-weight: 600; color: var(--ds-text); text-transform: uppercase; letter-spacing: 0.05em; }
+    .ds-type-sample--body { font-family: var(--ds-font-body); font-size: var(--ds-text-base); color: var(--ds-text-secondary); }
+    .ds-type-sample--caption { font-family: var(--ds-font-body); font-size: var(--ds-text-xs); color: var(--ds-text-muted); }
+    .ds-space-scale { display: grid; gap: 6px; }
+    .ds-space-item {
+      display: grid;
+      grid-template-columns: 52px 1fr 36px;
+      gap: var(--ds-space-2);
+      align-items: center;
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+    }
+    .ds-space-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--ds-smart-blue-tint);
+      border: 1px solid var(--ds-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .ds-space-bar span {
+      display: block;
+      height: 100%;
+      background: var(--ds-smart-blue);
+      border-radius: 3px;
+    }
+    .ds-layout-diagram {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: var(--ds-space-2);
+      height: 100px;
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+      text-align: center;
+    }
+    .ds-layout-side {
+      background: var(--ds-smart-blue-tint);
+      border: 1px dashed var(--ds-smart-blue);
+      border-radius: var(--ds-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+    }
+    .ds-layout-main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 4px;
+    }
+    .ds-layout-kpi {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+    .ds-layout-kpi span,
+    .ds-layout-bento span {
+      background: var(--ds-bg);
+      border: 1px solid var(--ds-border);
+      border-radius: 4px;
+      padding: 3px 2px;
+    }
+    .ds-layout-bento {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3px;
+      flex: 1;
+    }
+    .ds-density-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--ds-text-sm);
+    }
+    .ds-density-table th,
+    .ds-density-table td {
+      border-bottom: 1px solid var(--ds-border);
+      text-align: left;
+      padding: 6px 4px;
+      vertical-align: top;
+      color: var(--ds-text-secondary);
+    }
+    .ds-density-table th {
+      color: var(--ds-text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: var(--ds-text-xs);
+    }
+    .ds-density-table tr:last-child td { border-bottom: none; }
+    .ds-comp-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ds-space-2);
+      align-items: center;
+    }
+    .ds-docs .ds-btn:not(.ds-btn--primary) {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      color: var(--ds-text-secondary);
+    }
+    .ds-elev-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ds-space-2);
+    }
+    .ds-elev-sample {
+      height: 44px;
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+    }
+    .ds-elev-sample--1 { box-shadow: none; }
+    .ds-elev-sample--2 { box-shadow: var(--ds-shadow); }
+    .ds-elev-sample--3 { box-shadow: 0 8px 24px rgba(17, 24, 39, 0.08); }
+    .ds-preview__label {
+      font-family: var(--ds-font-body);
+      font-size: var(--ds-text-xs);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ds-text-muted);
+      margin: 0 0 var(--ds-space-3);
+    }
+    .ds-metric--full {
+      flex-direction: column;
+      align-items: stretch;
+      padding: var(--ds-pad-kpi);
+      gap: 0;
+    }
+    .ds-metric--full .ds-metric__icon {
+      margin-left: 0;
+      width: var(--ds-control-md);
+      height: var(--ds-control-md);
+      font-size: var(--ds-text-xl);
+      background: var(--ds-smart-blue-tint);
+    }
+    .ds-metric--full .ds-metric__head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .ds-metric--full .ds-metric__label {
+      font-size: var(--ds-text-base);
+      padding-top: 2px;
+      text-align: right;
+      color: var(--ds-text);
+    }
+    .ds-metric--full .ds-metric__value {
+      font-size: var(--ds-text-3xl);
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+    .ds-metric--grid .ds-metric__value { font-size: var(--ds-text-2xl); }
+    .ds-metric--grid { padding: var(--ds-pad-kpi); }
+    .ds-metric--grid .ds-metric__foot { flex-wrap: wrap; gap: 8px; }
+    .ds-metric__foot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ds-metric__meta { font-size: var(--ds-text-xs); color: var(--ds-text-muted); }
+
+    /* Tweak — palette comparison */
+    #view-tweak.active {
+      flex: 0 0 auto;
+      height: auto;
+      min-height: 0;
+      overflow: visible;
+    }
+    main.tweak-mode #view-updated.active {
+      flex: 1 1 0;
+      height: 0;
+      min-height: 0;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    main.tweak-mode #view-updated.active::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+    .tweak-panel {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-card);
+      box-shadow: var(--ds-shadow);
+    }
+    .tweak-panel__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .tweak-panel__title {
+      margin: 0;
+      font-family: var(--ds-font-display);
+      font-size: var(--ds-text-lg);
+      font-weight: 600;
+      color: var(--ds-text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tweak-panel__sub {
+      margin: 0;
+      font-size: var(--ds-text-sm);
+      color: var(--ds-text-muted);
+    }
+    .tweak-palettes {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .tweak-palette {
+      border: 2px solid var(--ds-border);
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-bg);
+      padding: 10px 10px 12px;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--ds-font-body);
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .tweak-palette:hover {
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 35%, var(--ds-border));
+      transform: translateY(-1px);
+    }
+    .tweak-palette.active {
+      border-color: var(--ds-smart-blue);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-smart-blue) 18%, transparent);
+    }
+    .tweak-palette__name {
+      display: block;
+      font-size: var(--ds-text-sm);
+      font-weight: 600;
+      color: var(--ds-text);
+      margin-bottom: 6px;
+    }
+    .tweak-palette__badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 6px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ds-smart-blue);
+      background: var(--ds-smart-blue-tint);
+      border: 1px solid color-mix(in srgb, var(--ds-smart-blue) 18%, var(--ds-border));
+      vertical-align: middle;
+    }
+    .tweak-palette__desc {
+      display: block;
+      font-size: var(--ds-text-xs);
+      color: var(--ds-text-muted);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .tweak-palette__swatches {
+      display: flex;
+      gap: 4px;
+    }
+    .tweak-palette__swatches span {
+      flex: 1;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    /* Mobile shell — drawer sidebar + compact top bar */
+    .ds-mobile-bar {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      padding-top: max(10px, env(safe-area-inset-top));
+      background: var(--ds-surface);
+      border-bottom: 1px solid var(--ds-border);
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 35;
+    }
+    .ds-mobile-bar__menu {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--ds-control-md);
+      height: var(--ds-control-md);
+      border: 1px solid var(--ds-border);
+      border-radius: var(--ds-radius-sm);
+      background: var(--ds-surface);
+      color: var(--ds-text-secondary);
+      font-size: var(--ds-text-xl);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
+    }
+    .ds-mobile-bar__menu:hover {
+      background: var(--ds-smart-blue-tint);
+      border-color: color-mix(in srgb, var(--ds-smart-blue) 25%, var(--ds-border));
+      color: var(--ds-smart-blue);
+    }
+    .ds-mobile-bar__menu:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--ds-smart-blue) 45%, transparent);
+      outline-offset: 2px;
+    }
+    .ds-mobile-bar__brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+    .ds-mobile-bar__brand .ds-sidebar-brand__mark {
+      width: 32px;
+      height: 32px;
+      font-size: var(--ds-text-lg);
+    }
+    .ds-mobile-bar__brand .ds-sidebar-brand__name {
+      font-size: var(--ds-text-base);
+      min-width: 0;
+    }
+    .ds-mobile-bar__brand .ds-sidebar-brand__name span {
+      font-size: 10px;
+    }
+    .ds-mobile-bar__page {
+      font-size: var(--ds-text-sm);
+      font-weight: 600;
+      color: var(--ds-smart-blue);
+      background: var(--ds-smart-blue-tint);
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      max-width: 42%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ds-sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      background: rgba(17, 24, 39, 0.42);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .ds-sidebar-backdrop.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    body.sidebar-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      html, body { overflow: auto; }
+      body.sidebar-open { overflow: hidden; }
+      .page { height: auto; min-height: 100vh; }
+      .layout { grid-template-columns: 1fr; }
+      .layout > main { grid-column: 1; }
+      .metrics, .ds-metrics { grid-template-columns: repeat(2, 1fr); }
+      .panels, .ds-panels { grid-template-columns: 1fr; grid-template-rows: auto; }
+      #view-updated .ds-panels {
+        grid-template-rows: auto auto;
+      }
+      #view-updated .ds-card--wide,
+      #view-updated .ds-card--share,
+      #view-updated .ds-card--cost,
+      #view-updated .ds-card--breakdown {
+        min-height: 0;
+        height: auto;
+      }
+      .ds-card--wide, .ds-card--share, .ds-card--cost, .ds-card--breakdown { grid-column: 1; grid-row: auto; }
+      .ds-welcome { gap: 12px; padding: 12px 14px; }
+      .ds-page-toolbar { justify-content: flex-end; }
+      .ds-welcome__icon { width: 40px; height: 40px; font-size: 20px; }
+      .ds-docs__grid { grid-template-columns: 1fr; }
+      .ds-doc-card--wide, .ds-doc-card--half { grid-column: span 1; }
+      .ds-swatches--row,
+      .ds-swatches--chart-ramp { grid-template-columns: repeat(2, 1fr); }
+      .tweak-palettes { grid-template-columns: repeat(2, 1fr); }
+      #view-updated .ds-card--share .ds-chart-block,
+      #view-updated .ds-card--breakdown .ds-chart-block {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .ds-card__sub { white-space: normal; }
+    }
+
+    .ds-lang-toggle--mobile { display: none; }
+    @media (max-width: 768px) {
+      header { display: none; }
+      .ds-mobile-bar { display: flex; }
+      #lang-toggle { display: none; }
+      .ds-lang-toggle--mobile { display: inline-flex; min-width: 36px; padding: 0 8px; }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: min(288px, 88vw);
+        z-index: 50;
+        transform: translateX(-105%);
+        transition: transform .28s cubic-bezier(.22, 1, .36, 1);
+        flex-direction: column;
+        flex-wrap: nowrap;
+        border-right: 1px solid var(--ds-border);
+        border-bottom: none;
+        box-shadow: 4px 0 16px rgba(17, 24, 39, 0.08);
+        padding-top: max(16px, env(safe-area-inset-top));
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .sidebar.is-open {
+        transform: translateX(0);
+      }
+      .theme-updated .sidebar {
+        padding: max(16px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom));
+      }
+      .theme-updated main {
+        padding: 12px 14px 16px;
+      }
+      .section-head {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .view-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .view-tabs::-webkit-scrollbar { display: none; }
+      .view-tab {
+        flex-shrink: 0;
+        padding: 8px 12px;
+        font-size: var(--ds-text-sm);
+      }
+      #toolbar { display: none !important; }
+      .ds-page-toolbar .ds-btn--primary span,
+      .ds-page-toolbar .ds-btn--primary {
+        font-size: 0;
+        padding: 8px 10px !important;
+        gap: 0;
+      }
+      .ds-page-toolbar .ds-btn--primary i { font-size: 18px; }
+      .ds-table--performance {
+        min-width: 540px;
+      }
+      .ds-greeting { font-size: var(--ds-text-lg); }
+      .ds-cost-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .ds-cost-chip__val { font-size: var(--ds-text-base); }
+    }
+
+    @media (max-width: 480px) {
+      .metrics, .ds-metrics { grid-template-columns: 1fr; }
+      .ds-mobile-bar__page { max-width: 36%; }
+      .ds-welcome {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page theme-updated" id="page" data-palette="vivid">
+    <div class="ds-mobile-bar" id="mobile-bar">
+      <button class="ds-mobile-bar__menu" type="button" id="sidebar-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="app-sidebar">
+        <i class="ph ph-list" aria-hidden="true"></i>
+      </button>
+      <div class="ds-mobile-bar__brand">
+        <div class="ds-sidebar-brand__mark" aria-hidden="true"><i class="ph ph-users-three"></i></div>
+        <div class="ds-sidebar-brand__name">RecruitOS<span data-i18n="brand.subtitle">Vendor & Analytics</span></div>
+      </div>
+      <button type="button" class="ds-lang-toggle ds-lang-toggle--mobile" id="lang-toggle-mobile" aria-label="Switch to Chinese" data-i18n="lang.switch">中文</button>
+      <span class="ds-mobile-bar__page" id="mobile-page-label">Dashboard</span>
+    </div>
+    <div class="ds-sidebar-backdrop" id="sidebar-backdrop" hidden aria-hidden="true"></div>
+    <header>
+      <h1>Recruiting Vendor & Analytics System</h1>
+      <div class="header-meta display-only">
+        <span>Jun 2026</span>
+        <span>·</span>
+        <span>42 open roles</span>
+        <span>·</span>
+        <span>APAC & Global</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" id="app-sidebar" aria-label="Module navigation">
+        <div class="sidebar-panel sidebar-panel--updated" id="sidebar-updated">
+          <div class="ds-sidebar-brand">
+            <div class="ds-sidebar-brand__mark" aria-hidden="true"><i class="ph ph-users-three"></i></div>
+            <div class="ds-sidebar-brand__name">RecruitOS<span data-i18n="brand.subtitle">Vendor & Analytics</span></div>
+          </div>
+          <nav class="ds-sidebar-nav" aria-label="Primary modules">
+          <div class="ds-nav-group-label" data-i18n="nav.group.main">Main</div>
+          <button type="button" class="ds-nav-item active" data-nav-key="dashboard" aria-current="page"><i class="ph ph-squares-four" aria-hidden="true"></i><span data-i18n="nav.dashboard">Dashboard</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="channel"><i class="ph ph-broadcast" aria-hidden="true"></i><span data-i18n="nav.channel">Channel Management</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="headhunter"><i class="ph ph-users" aria-hidden="true"></i><span data-i18n="nav.headhunter">Headhunter Management</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="headhunterFees"><i class="ph ph-currency-dollar" aria-hidden="true"></i><span data-i18n="nav.headhunterFees">Headhunter Fees</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="backgroundCheck"><i class="ph ph-shield-check" aria-hidden="true"></i><span data-i18n="nav.backgroundCheck">Background Check Costs</span></button>
+          <div class="ds-nav-group-label" data-i18n="nav.group.insights">Insights</div>
+          <button type="button" class="ds-nav-item" data-nav-key="costAnalysis"><i class="ph ph-chart-pie-slice" aria-hidden="true"></i><span data-i18n="nav.costAnalysis">Recruiting Cost Analysis</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="analytics"><i class="ph ph-chart-line-up" aria-hidden="true"></i><span data-i18n="nav.analytics">Recruiting Analytics</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="reminders"><i class="ph ph-bell" aria-hidden="true"></i><span data-i18n="nav.reminders">Reminders</span><span class="ds-nav-badge ds-nav-badge--amber">12</span></button>
+          <div class="ds-nav-group-label" data-i18n="nav.group.admin">Admin</div>
+          <button type="button" class="ds-nav-item" data-nav-key="fileCenter"><i class="ph ph-folder" aria-hidden="true"></i><span data-i18n="nav.fileCenter">File Center</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="contract"><i class="ph ph-file-text" aria-hidden="true"></i><span data-i18n="nav.contract">Contract Management</span><span class="ds-nav-badge ds-nav-badge--coral">3</span></button>
+          <button type="button" class="ds-nav-item" data-nav-key="settings"><i class="ph ph-gear" aria-hidden="true"></i><span data-i18n="nav.settings">System Settings</span></button>
+          </nav>
+          <div class="ds-sidebar-user">
+            <div class="ds-sidebar-user__avatar">TL</div>
+            <div class="ds-sidebar-user__info">
+              <div class="ds-sidebar-user__name">Terence Liang</div>
+              <div class="ds-sidebar-user__role" data-i18n="role.hrOps">HR Operations</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-panel sidebar-panel--legacy" id="sidebar-legacy" hidden>
+          <nav aria-label="Primary modules">
+          <button type="button" class="nav-item active" data-nav-label="Dashboard" aria-current="page">Dashboard</button>
+          <button type="button" class="nav-item" data-nav-label="Channel Management">Channel Management</button>
+          <button type="button" class="nav-item" data-nav-label="Headhunter Management">Headhunter Management</button>
+          <button type="button" class="nav-item" data-nav-label="Headhunter Fees">Headhunter Fees</button>
+          <button type="button" class="nav-item" data-nav-label="Background Check Costs">Background Check Costs</button>
+          <button type="button" class="nav-item" data-nav-label="Recruiting Cost Analysis">Recruiting Cost Analysis</button>
+          <button type="button" class="nav-item" data-nav-label="Recruiting Analytics">Recruiting Analytics</button>
+          <button type="button" class="nav-item" data-nav-label="Reminders">Reminders</button>
+          <button type="button" class="nav-item" data-nav-label="File Center">File Center</button>
+          <button type="button" class="nav-item" data-nav-label="Contract Management">Contract Management</button>
+          <button type="button" class="nav-item" data-nav-label="System Settings">System Settings</button>
+          <button type="button" class="nav-item" data-nav-label="Data Flow">Data Flow</button>
+          </nav>
+        </div>
+      </aside>
+
+      <main>
+        <div class="section-head">
+          <div class="view-tabs" role="tablist" data-i18n-aria="tabs.listAria" aria-label="Prototype views">
+            <button class="view-tab" role="tab" aria-selected="false" data-view="before" data-i18n="tabs.original">Original</button>
+            <button class="view-tab active" role="tab" aria-selected="true" data-view="updated" data-i18n="tabs.newDesign">New Design</button>
+            <button class="view-tab" role="tab" aria-selected="false" data-view="design-system" data-i18n="tabs.specs">Specs</button>
+            <button class="view-tab" role="tab" aria-selected="false" data-view="tweak" data-i18n="tabs.themes">Themes</button>
+          </div>
+          <div class="section-head__end">
+            <button type="button" class="ds-lang-toggle" id="lang-toggle" aria-label="Switch to Chinese" data-i18n="lang.switch">中文</button>
+          <div class="toolbar display-only" id="toolbar">
+            <input class="small-input ds-input" type="date" value="2026-06-01" readonly tabindex="-1">
+            <input class="small-input ds-input" type="date" value="2026-06-30" readonly tabindex="-1">
+            <button class="btn secondary ds-btn" type="button" tabindex="-1">
+              <i class="ph ph-arrows-clockwise" style="font-size:16px"></i>
+              Last synced: 09:30
+            </button>
+          </div>
+          </div>
+        </div>
+
+        <!-- Before -->
+        <div class="view-panel" id="view-before" role="tabpanel">
+          <div class="metrics display-only">
+            <div class="metric">
+              <div class="label">Active Channels</div>
+              <div class="value">8</div>
+              <div class="note">+2 vs last month</div>
+            </div>
+            <div class="metric">
+              <div class="label">Contract Risk</div>
+              <div class="value">3</div>
+              <div class="note">2 expiring soon</div>
+            </div>
+            <div class="metric">
+              <div class="label">Pending Reminders</div>
+              <div class="value">12</div>
+              <div class="note">5 payment · 7 contract</div>
+            </div>
+            <div class="metric">
+              <div class="label">Monthly Recruiting Cost</div>
+              <div class="value">44</div>
+              <div class="note">28 paid · amounts restricted</div>
+            </div>
+          </div>
+          <div class="panels">
+            <div class="card">
+              <h3>Source Performance</h3>
+              <div class="card-body table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Source</th><th>Resumes</th><th>Offers</th><th>Hired</th><th>Conversion</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Boss Zhipin</td><td>320</td><td>18</td><td>12</td><td>3.75%</td><td><span class="tag ok">Stable</span></td></tr>
+                    <tr><td>LinkedIn</td><td>180</td><td>14</td><td>8</td><td>4.44%</td><td><span class="tag info">Strong for senior roles</span></td></tr>
+                    <tr><td>Headhunter</td><td>42</td><td>9</td><td>5</td><td>11.90%</td><td><span class="tag warn">Cost review needed</span></td></tr>
+                    <tr><td>Maimai</td><td>96</td><td>6</td><td>3</td><td>3.13%</td><td><span class="tag ok">Growing</span></td></tr>
+                    <tr><td>Campus Referral</td><td>58</td><td>4</td><td>2</td><td>3.45%</td><td><span class="tag info">Early talent</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Source Share</h3>
+              <div class="card-body">
+                <div class="pie-wrap">
+                  <div class="pie"></div>
+                  <div class="pie-legend">Boss 38% · LinkedIn 24%<br>Headhunter 18% · Other 20%</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Recruiting Cost Summary</h3>
+              <div class="card-body">
+                <div class="auth-mask">44 items · 28 paid · 16 pending<br>Admin authorization required for amounts</div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Cost Breakdown</h3>
+              <div class="card-body">
+                <div class="pie-wrap">
+                  <div class="pie cost"></div>
+                  <div class="pie-legend">Headhunter 45% · Channel 27%<br>Background check 28%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tweak — palette switcher (pairs with Updated preview below) -->
+        <div class="view-panel" id="view-tweak" role="tabpanel">
+          <div class="tweak-panel">
+            <div class="tweak-panel__head">
+              <h2 class="tweak-panel__title">Color Palette</h2>
+              <p class="tweak-panel__sub">Vivid Sky is the production palette · preview alternates below · Design System documents Vivid Sky</p>
+            </div>
+            <div class="tweak-palettes" role="listbox" aria-label="Color palettes">
+              <button type="button" class="tweak-palette active" data-palette="vivid" role="option" aria-selected="true">
+                <span class="tweak-palette__name">Vivid Sky <span class="tweak-palette__badge">Production</span></span>
+                <span class="tweak-palette__desc">Blue ramp · coral accent · near-white cool bg</span>
+                <span class="tweak-palette__swatches"><span style="background:#4B7FEE"></span><span style="background:#EA6C2E"></span><span style="background:#FFFFFF;border:1px solid #E8EEF5"></span></span>
+              </button>
+              <button type="button" class="tweak-palette" data-palette="classic" role="option" aria-selected="false">
+                <span class="tweak-palette__name">Classic Pro</span>
+                <span class="tweak-palette__desc">Navy ramp · amber accent · near-white slate bg</span>
+                <span class="tweak-palette__swatches"><span style="background:#1A56DB"></span><span style="background:#D97706"></span><span style="background:#FAFBFD;border:1px solid #EAECF1"></span></span>
+              </button>
+              <button type="button" class="tweak-palette" data-palette="bloom" role="option" aria-selected="false">
+                <span class="tweak-palette__name">Bloom</span>
+                <span class="tweak-palette__desc">Violet ramp · rose accent · near-white lilac bg</span>
+                <span class="tweak-palette__swatches"><span style="background:#7C3AED"></span><span style="background:#DB2777"></span><span style="background:#FCFAFE;border:1px solid #EFE9F5"></span></span>
+              </button>
+              <button type="button" class="tweak-palette" data-palette="mint" role="option" aria-selected="false">
+                <span class="tweak-palette__name">Mint Fresh</span>
+                <span class="tweak-palette__desc">Cyan ramp · green accent · near-white mint bg</span>
+                <span class="tweak-palette__swatches"><span style="background:#0E94B0"></span><span style="background:#16A34A"></span><span style="background:#FAFDFC;border:1px solid #E6F2EE"></span></span>
+              </button>
+              <button type="button" class="tweak-palette" data-palette="sunset" role="option" aria-selected="false">
+                <span class="tweak-palette__name">Sunset</span>
+                <span class="tweak-palette__desc">Orange ramp · rose accent · near-white warm bg</span>
+                <span class="tweak-palette__swatches"><span style="background:#E85D0E"></span><span style="background:#DB2777"></span><span style="background:#FDF9F6;border:1px solid #EFE4D9"></span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Updated (default) -->
+        <div class="view-panel active" id="view-updated" role="tabpanel">
+          <div class="ds-page-head display-only">
+            <div class="ds-page-toolbar">
+              <div class="ds-page-actions">
+                <span class="ds-icon-btn"><i class="ph ph-magnifying-glass"></i></span>
+                <span class="ds-icon-btn"><i class="ph ph-bell"></i></span>
+                <button class="btn ds-btn ds-btn--primary" type="button" tabindex="-1">
+                  <i class="ph ph-plus" style="font-size:16px"></i> <span data-i18n="toolbar.export">Export Report</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-welcome">
+              <div class="ds-welcome__icon" aria-hidden="true"><i class="ph ph-sun"></i></div>
+              <div class="ds-welcome__text">
+                <h2 class="ds-greeting" data-i18n="welcome.greeting">Good morning, Terence</h2>
+                <p class="ds-summary" data-i18n-html="welcome.summary">You have <b>12 reminders</b>, <b>3 contract risks</b>, and <b>25 hires</b> this month across 8 active channels.</p>
+              </div>
+            </div>
+          </div>
+          <div class="ds-metrics display-only">
+            <article class="ds-metric ds-metric--full ds-metric--grid">
+              <div class="ds-metric__head">
+                <div class="ds-metric__icon"><i class="ph ph-broadcast"></i></div>
+                <div class="ds-metric__label" data-i18n="kpi.activeChannels">Active Channels</div>
+              </div>
+              <div class="ds-metric__value">8</div>
+              <div class="ds-metric__foot">
+                <span class="ds-tag ds-tag--teal"><i class="ph ph-trend-up" style="font-size:14px"></i> <span data-i18n="kpi.channels.delta">+2 this month</span></span>
+                <span class="ds-metric__meta" data-i18n="kpi.channels.meta">vs. 6 last period</span>
+              </div>
+            </article>
+            <article class="ds-metric ds-metric--full ds-metric--grid">
+              <div class="ds-metric__head">
+                <div class="ds-metric__icon"><i class="ph ph-warning-circle"></i></div>
+                <div class="ds-metric__label" data-i18n="kpi.contractRisk">Contract Risk</div>
+              </div>
+              <div class="ds-metric__value">3</div>
+              <div class="ds-metric__foot">
+                <span class="ds-tag ds-tag--coral" data-i18n="kpi.contract.delta">2 expiring</span>
+                <span class="ds-metric__meta" data-i18n="kpi.contract.meta">within 45 days</span>
+              </div>
+            </article>
+            <article class="ds-metric ds-metric--full ds-metric--grid">
+              <div class="ds-metric__head">
+                <div class="ds-metric__icon"><i class="ph ph-bell"></i></div>
+                <div class="ds-metric__label" data-i18n="kpi.pendingReminders">Pending Reminders</div>
+              </div>
+              <div class="ds-metric__value">12</div>
+              <div class="ds-metric__foot">
+                <span class="ds-tag ds-tag--amber" data-i18n="kpi.reminders.payment">5 payment</span>
+                <span class="ds-metric__meta" data-i18n="kpi.reminders.meta">7 contract · 0 other</span>
+              </div>
+            </article>
+            <article class="ds-metric ds-metric--full ds-metric--grid">
+              <div class="ds-metric__head">
+                <div class="ds-metric__icon"><i class="ph ph-wallet"></i></div>
+                <div class="ds-metric__label" data-i18n="kpi.costItems">Cost Items</div>
+              </div>
+              <div class="ds-metric__value">44</div>
+              <div class="ds-metric__foot">
+                <span class="ds-tag ds-tag--blue" data-i18n="kpi.cost.paid">28 paid</span>
+                <span class="ds-metric__meta" data-i18n="kpi.cost.meta">16 pending · restricted</span>
+              </div>
+            </article>
+          </div>
+          <div class="ds-panels">
+            <div class="ds-card ds-card--wide">
+              <div class="ds-card__head">
+                <h3 class="ds-card__title" data-i18n="card.sourcePerformance">Source Performance</h3>
+                <span class="ds-card__sub" data-i18n="card.sourcePerformance.sub">542 resumes · 41 offers · 25 hired</span>
+              </div>
+              <div class="ds-card__body ds-card__body--table">
+                <div class="ds-table-shell">
+                <div class="ds-table-scroll">
+                <table class="ds-table ds-table--performance">
+                  <thead>
+                    <tr><th data-i18n="table.source">Source</th><th data-i18n="table.resumes">Resumes</th><th data-i18n="table.offers">Offers</th><th data-i18n="table.hired">Hired</th><th data-i18n="table.conv">Conv.</th><th data-i18n="table.status">Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Boss Zhipin</td><td>320</td><td>18</td><td>12</td><td>3.75%</td><td><span class="ds-tag ds-tag--teal" data-i18n="status.stable">Stable</span></td></tr>
+                    <tr><td>LinkedIn</td><td>180</td><td>14</td><td>8</td><td>4.44%</td><td><span class="ds-tag ds-tag--blue" data-i18n="status.seniorRoles">Senior roles</span></td></tr>
+                    <tr><td>Headhunter</td><td>42</td><td>9</td><td>5</td><td>11.90%</td><td><span class="ds-tag ds-tag--amber" data-i18n="status.reviewCost">Review cost</span></td></tr>
+                    <tr><td>Maimai</td><td>96</td><td>6</td><td>3</td><td>3.13%</td><td><span class="ds-tag ds-tag--teal" data-i18n="status.growing">Growing</span></td></tr>
+                    <tr><td>Campus Referral</td><td>58</td><td>4</td><td>2</td><td>3.45%</td><td><span class="ds-tag ds-tag--blue" data-i18n="status.earlyTalent">Early talent</span></td></tr>
+                  </tbody>
+                </table>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-card ds-card--share">
+              <div class="ds-card__head">
+                <h3 class="ds-card__title" data-i18n="card.sourceShare">Source Share</h3>
+                <span class="ds-card__sub" data-i18n="card.sourceShare.sub">By hires, Jun 2026</span>
+              </div>
+              <div class="ds-card__body">
+                <div class="ds-chart-block">
+                  <div class="ds-chart-well">
+                    <div class="ds-donut ds-donut--interactive" data-slices='[{"pct":38,"token":"accent","label":"Boss Zhipin"},{"pct":24,"token":"c2","label":"LinkedIn"},{"pct":18,"token":"c3","label":"Headhunter"},{"pct":20,"token":"c4","label":"Other"}]'>
+                      <svg class="ds-donut__svg" viewBox="0 0 100 100" aria-hidden="true">
+                        <g class="ds-donut__track-ring"></g>
+                        <g class="ds-donut__slices"></g>
+                      </svg>
+                      <div class="ds-donut__center" aria-live="polite" aria-atomic="true">
+                        <span class="ds-donut__key">38%</span>
+                        <span class="ds-donut__key-label">Boss Zhipin</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-legend-list">
+                    <div class="ds-legend-row ds-legend-row--key">
+                      <span class="ds-legend-dot ds-legend-dot--accent"></span>
+                      <span class="ds-legend-name">Boss Zhipin</span>
+                      <span class="ds-legend-val">38%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--accent" style="width:38%"></span></div>
+                    </div>
+                    <div class="ds-legend-row">
+                      <span class="ds-legend-dot ds-legend-dot--c2"></span>
+                      <span class="ds-legend-name">LinkedIn</span>
+                      <span class="ds-legend-val">24%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--c2" style="width:24%"></span></div>
+                    </div>
+                    <div class="ds-legend-row">
+                      <span class="ds-legend-dot ds-legend-dot--c3"></span>
+                      <span class="ds-legend-name" data-i18n="chart.headhunter">Headhunter</span>
+                      <span class="ds-legend-val">18%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--c3" style="width:18%"></span></div>
+                    </div>
+                    <div class="ds-legend-row">
+                      <span class="ds-legend-dot ds-legend-dot--c4"></span>
+                      <span class="ds-legend-name" data-i18n="chart.other">Other</span>
+                      <span class="ds-legend-val">20%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--c4" style="width:20%"></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-card ds-card--cost">
+              <div class="ds-card__head">
+                <h3 class="ds-card__title" data-i18n="card.costSummary">Recruiting Cost Summary</h3>
+                <span class="ds-card__sub" data-i18n="card.costSummary.sub">44 items tracked</span>
+              </div>
+              <div class="ds-card__body ds-card__body--cost">
+                <div class="ds-cost-panel">
+                  <div class="ds-cost-summary">
+                    <div class="ds-cost-chip">
+                      <span class="ds-cost-chip__val">28</span>
+                      <span class="ds-cost-chip__lbl" data-i18n="cost.paid">Paid</span>
+                    </div>
+                    <div class="ds-cost-chip">
+                      <span class="ds-cost-chip__val">16</span>
+                      <span class="ds-cost-chip__lbl" data-i18n="cost.pending">Pending</span>
+                    </div>
+                    <div class="ds-cost-chip ds-cost-chip--locked">
+                      <span class="ds-cost-chip__val ds-cost-chip__val--locked" data-i18n-aria="cost.restrictedSpend" aria-label="Restricted total spend" title="Restricted"><i class="ph ph-lock-simple" aria-hidden="true"></i></span>
+                      <span class="ds-cost-chip__lbl" data-i18n="cost.totalSpend">Total spend</span>
+                    </div>
+                  </div>
+                  <div class="ds-cost-list">
+                    <div class="ds-cost-item">
+                      <div class="ds-cost-item__head">
+                        <span class="ds-cost-item__dot" aria-hidden="true"></span>
+                        <span class="ds-cost-item__label" data-i18n="cost.headhunterFees">Headhunter fees</span>
+                        <span class="ds-cost-item__meta" data-i18n-html="cost.meta" data-i18n-paid="8" data-i18n-pending="6"><b>8</b> paid · 6 pending</span>
+                      </div>
+                      <div class="ds-cost-progress" role="img" data-i18n-aria="cost.progress" data-i18n-paid="8" data-i18n-total="14" data-i18n-pending="6" aria-label="8 of 14 items paid, 6 pending">
+                        <span class="ds-cost-progress__paid" style="width:57%"></span>
+                        <span class="ds-cost-progress__pending" style="width:43%"></span>
+                      </div>
+                    </div>
+                    <div class="ds-cost-item">
+                      <div class="ds-cost-item__head">
+                        <span class="ds-cost-item__dot" aria-hidden="true"></span>
+                        <span class="ds-cost-item__label" data-i18n="cost.channelFees">Channel fees</span>
+                        <span class="ds-cost-item__meta" data-i18n-html="cost.meta" data-i18n-paid="5" data-i18n-pending="3"><b>5</b> paid · 3 pending</span>
+                      </div>
+                      <div class="ds-cost-progress" role="img" data-i18n-aria="cost.progress" data-i18n-paid="5" data-i18n-total="8" data-i18n-pending="3" aria-label="5 of 8 items paid, 3 pending">
+                        <span class="ds-cost-progress__paid" style="width:63%"></span>
+                        <span class="ds-cost-progress__pending" style="width:37%"></span>
+                      </div>
+                    </div>
+                    <div class="ds-cost-item">
+                      <div class="ds-cost-item__head">
+                        <span class="ds-cost-item__dot" aria-hidden="true"></span>
+                        <span class="ds-cost-item__label" data-i18n="cost.backgroundChecks">Background checks</span>
+                        <span class="ds-cost-item__meta" data-i18n-html="cost.meta" data-i18n-paid="15" data-i18n-pending="7"><b>15</b> paid · 7 pending</span>
+                      </div>
+                      <div class="ds-cost-progress" role="img" data-i18n-aria="cost.progress" data-i18n-paid="15" data-i18n-total="22" data-i18n-pending="7" aria-label="15 of 22 items paid, 7 pending">
+                        <span class="ds-cost-progress__paid" style="width:68%"></span>
+                        <span class="ds-cost-progress__pending" style="width:32%"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-cost-auth">
+                    <i class="ph ph-shield-warning" aria-hidden="true"></i>
+                    <span data-i18n="cost.restricted">Amounts restricted</span>
+                    <span aria-hidden="true">·</span>
+                    <span class="ds-cost-auth__link" data-i18n="cost.requestAccess">Request access</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-card ds-card--breakdown">
+              <div class="ds-card__head">
+                <h3 class="ds-card__title" data-i18n="card.costBreakdown">Cost Breakdown</h3>
+                <span class="ds-card__sub" data-i18n="card.costBreakdown.sub">By category</span>
+              </div>
+              <div class="ds-card__body">
+                <div class="ds-chart-block">
+                  <div class="ds-chart-well">
+                    <div class="ds-donut ds-donut--interactive" data-slices='[{"pct":45,"token":"accent","label":"Headhunter"},{"pct":27,"token":"c2","label":"Channel"},{"pct":28,"token":"c3","label":"Background check"}]'>
+                      <svg class="ds-donut__svg" viewBox="0 0 100 100" aria-hidden="true">
+                        <g class="ds-donut__track-ring"></g>
+                        <g class="ds-donut__slices"></g>
+                      </svg>
+                      <div class="ds-donut__center" aria-live="polite" aria-atomic="true">
+                        <span class="ds-donut__key">45%</span>
+                        <span class="ds-donut__key-label">Headhunter</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-legend-list">
+                    <div class="ds-legend-row ds-legend-row--key">
+                      <span class="ds-legend-dot ds-legend-dot--accent"></span>
+                      <span class="ds-legend-name" data-i18n="chart.headhunter">Headhunter</span>
+                      <span class="ds-legend-val">45%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--accent" style="width:45%"></span></div>
+                    </div>
+                    <div class="ds-legend-row">
+                      <span class="ds-legend-dot ds-legend-dot--c2"></span>
+                      <span class="ds-legend-name" data-i18n="chart.channel">Channel</span>
+                      <span class="ds-legend-val">27%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--c2" style="width:27%"></span></div>
+                    </div>
+                    <div class="ds-legend-row">
+                      <span class="ds-legend-dot ds-legend-dot--c3"></span>
+                      <span class="ds-legend-name" data-i18n="chart.backgroundCheck">Background check</span>
+                      <span class="ds-legend-val">28%</span>
+                      <div class="ds-legend-bar"><span class="ds-legend-bar__fill--c3" style="width:28%"></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design System -->
+        <div class="view-panel" id="view-design-system" role="tabpanel">
+          <div class="ds-docs">
+            <div class="ds-docs__header">
+              <h2 class="ds-docs__title">RecruitOS Design System</h2>
+              <p class="ds-docs__sub">v1.0 · Vivid Sky · Clear, professional, subtly energetic</p>
+            </div>
+
+            <div class="ds-docs__grid">
+              <section class="ds-doc-card ds-doc-card--wide">
+                <p class="ds-doc-card__label">Principles</p>
+                <ul class="ds-doc-list">
+                  <li><strong>Structured clarity</strong> — card boundaries define information zones; avoid flat full-page tables.</li>
+                  <li><strong>Vivid Sky palette</strong> — production theme: blue ramp for brand &amp; chart segments; <strong>one coral-orange accent</strong> on the key data point. This doc reflects Vivid Sky only; alternate palettes preview in <strong>Themes</strong>, not here.</li>
+                  <li><strong>Chart interaction</strong> — donut rings start thin (5.5px stroke); hovered segment thickens to 11.5px; inactive segments dim to 32% opacity. Center label updates with the active slice; legend stays in sync.</li>
+                  <li><strong>Unified hover</strong> — brand-tinted background lift on rows, cards, and list items; no lateral slide or border-width jumps.</li>
+                  <li><strong>Semantic accents</strong> — Teal (positive), Amber (attention), Coral (risk) reserved for status tags — never chart segment fills.</li>
+                  <li><strong>Moderate density</strong> — comfortable whitespace on overview screens; compact mode for data-heavy modules.</li>
+                  <li><strong>Text hierarchy</strong> — primary (#111827) for titles, values &amp; data labels; secondary (#4B5563) for body &amp; column headers; muted (#9CA3AF) for timestamps, footnotes &amp; metadata only.</li>
+                </ul>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Color · Brand (Vivid Sky)</p>
+                <div class="ds-swatches">
+                  <div class="ds-swatch ds-swatch--blue">Blue<span>#4B7FEE</span></div>
+                  <div class="ds-swatch ds-swatch--brand-light">Light<span>#729AF2</span></div>
+                  <div class="ds-swatch ds-swatch--brand-dark">Dark<span>#3568D9</span></div>
+                  <div class="ds-swatch ds-swatch--tint">Tint<span>#F2F6FC</span></div>
+                </div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Brand blue drives nav active states, primary buttons, icons, KPI hovers, and chart ramp base. Token: <code>--ds-smart-blue</code>.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Color · Neutral</p>
+                <div class="ds-swatches">
+                  <div class="ds-swatch ds-swatch--bg ds-swatch--light">Background<span>#FFFFFF</span></div>
+                  <div class="ds-swatch ds-swatch--surface ds-swatch--light">Surface<span>#FFFFFF</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:var(--ds-border)">Border<span>#E8EEF5</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:#111827;color:#fff">Primary<span>#111827</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:#4B5563;color:#fff">Secondary<span>#4B5563</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:#9CA3AF;color:#fff">Muted<span>#9CA3AF</span></div>
+                </div>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Color · Chart Palette</p>
+                <div class="ds-swatches ds-swatches--chart-ramp">
+                  <div class="ds-swatch ds-swatch--chart-1">Blue 1<span>#4B7FEE</span></div>
+                  <div class="ds-swatch ds-swatch--chart-2">Blue 2<span>#6B96F1</span></div>
+                  <div class="ds-swatch ds-swatch--chart-3">Blue 3<span>#93B3F5</span></div>
+                  <div class="ds-swatch ds-swatch--chart-4">Blue 4<span>#BCCFF9</span></div>
+                  <div class="ds-swatch ds-swatch--chart-accent">Coral<span>#EA6C2E</span></div>
+                </div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Charts: blue gradient ramp (<code>--ds-chart-1</code>–<code>4</code>) for segments; <strong>coral-orange gradient</strong> on the key metric. Chart well uses cool tint (<code>#F6F9FD</code> → <code>#FDFEFE</code>); center label shows primary value — no inner white disc.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Color · Welcome Card</p>
+                <div class="ds-swatches">
+                  <div class="ds-swatch ds-swatch--light" style="background:var(--ds-welcome-from)">Gradient start<span>#F5F8FF</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:var(--ds-welcome-mid)">Gradient mid<span>#EAF1FF</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:var(--ds-welcome-border)">Border<span>#E0E9F4</span></div>
+                  <div class="ds-swatch ds-swatch--light" style="background:var(--ds-welcome-text);color:#fff">Greeting<span>#1E293B</span></div>
+                </div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Full-width greeting below toolbar. Soft blue gradient + sun icon; emphasis values use <code>#1D4ED8</code>. Distinct from page bg — not another flat white card.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Color · Semantic (UI only)</p>
+                <div class="ds-swatches">
+                  <div class="ds-swatch ds-swatch--teal">Teal<span>#0D9488</span></div>
+                  <div class="ds-swatch ds-swatch--amber">Amber<span>#D97706</span></div>
+                  <div class="ds-swatch ds-swatch--coral">Coral<span>#E11D48</span></div>
+                  <div class="ds-swatch" style="background:#64748B">Slate<span>#64748B</span></div>
+                </div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Tags &amp; status only — never used as chart segment fills.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Typography</p>
+                <div class="ds-type-row"><span>Display</span><span class="ds-type-sample--display">30–32px DM Sans 700</span></div>
+                <div class="ds-type-row"><span>Heading</span><span class="ds-type-sample--heading">Page &amp; card titles</span></div>
+                <div class="ds-type-row"><span>Title</span><span class="ds-type-sample--title">Card section titles</span></div>
+                <div class="ds-type-row"><span>Body</span><span class="ds-type-sample--body">14px DM Sans 400/500</span></div>
+                <div class="ds-type-row"><span>Caption</span><span class="ds-type-sample--caption">12px · metadata only</span></div>
+                <div class="ds-type-row"><span>Primary</span><span class="ds-type-sample--title">Titles, KPI values, table data, category names</span></div>
+                <div class="ds-type-row"><span>Secondary</span><span class="ds-type-sample--body">Summary body, column headers, nav items</span></div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Single family: <strong>DM Sans</strong> throughout. Headings &amp; card titles: <strong>uppercase</strong> + letter-spacing. KPI values &amp; body stay sentence case. <strong>Never</strong> use muted for primary labels — only footnotes like “vs. last period”.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Spacing Scale</p>
+                <div class="ds-space-scale">
+                  <div class="ds-space-item"><span>4</span><div class="ds-space-bar"><span style="width:4px"></span></div><span>xs</span></div>
+                  <div class="ds-space-item"><span>8</span><div class="ds-space-bar"><span style="width:8px"></span></div><span>sm</span></div>
+                  <div class="ds-space-item"><span>12</span><div class="ds-space-bar"><span style="width:12px"></span></div><span>md</span></div>
+                  <div class="ds-space-item"><span>16</span><div class="ds-space-bar"><span style="width:16px"></span></div><span>lg</span></div>
+                  <div class="ds-space-item"><span>20</span><div class="ds-space-bar"><span style="width:20px"></span></div><span>xl</span></div>
+                  <div class="ds-space-item"><span>28</span><div class="ds-space-bar"><span style="width:28px"></span></div><span>2xl</span></div>
+                </div>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Container Heights · Bento</p>
+                <table class="ds-density-table">
+                  <thead><tr><th>Token</th><th>Value</th><th>Applies to</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>--ds-panel-row-1-h</strong></td><td>360px</td><td>Row 1 cards (Source Performance + Source Share)</td></tr>
+                    <tr><td><strong>--ds-panel-row-2-h</strong></td><td>328px</td><td>Row 2 cards (Cost Summary + Cost Breakdown)</td></tr>
+                    <tr><td><strong>--ds-panel-content-min</strong></td><td>248px</td><td>Shared inner zone: table shell, chart block</td></tr>
+                    <tr><td><strong>--ds-card-head-h</strong></td><td>44px</td><td>Card title row (title + subtitle)</td></tr>
+                    <tr><td><strong>--ds-table-row-h</strong></td><td>40px</td><td>Table header + body rows (6 rows = 240px + borders)</td></tr>
+                  </tbody>
+                </table>
+                <p class="ds-doc-card__text" style="margin-top:10px">Same-row siblings share row height. Card = head (44px) + body (min 248px) + card pad (36px). Row 1 totals ~360px; row 2 ~328px for slightly denser cost modules.</p>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Layout · Page Grid</p>
+                <div class="ds-layout-diagram">
+                  <div class="ds-layout-side">Sidebar<br>252px</div>
+                  <div class="ds-layout-main">
+                    <div class="ds-layout-kpi">
+                      <span>KPI</span><span>KPI</span><span>KPI</span><span>KPI</span>
+                    </div>
+                    <div class="ds-layout-bento">
+                      <span>Wide 1.4</span><span>Narrow 1</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Main padding 20×24px · Section gap 16px · Card gap 14px · Control height 36px · KPI 4-column equal grid · Content bento 1.4 : 1.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Information Density</p>
+                <table class="ds-density-table">
+                  <thead><tr><th>Mode</th><th>When</th><th>Rules</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Comfortable</strong></td><td>Dashboard overview</td><td>Card pad 18–20px, table row 40px, control 36px, greeting + summary on top</td></tr>
+                    <tr><td><strong>Compact</strong></td><td>Lists &amp; modules</td><td>Card pad 12–14px, table row 8px, gap 10px</td></tr>
+                    <tr><td><strong>Scrollable</strong></td><td>Dashboard overview</td><td>Main column scrolls; bento row 1 = 360px, row 2 = 328px; inner content min 248px</td></tr>
+                  </tbody>
+                </table>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Components · Tags &amp; Buttons</p>
+                <div class="ds-comp-row" style="margin-bottom:10px">
+                  <span class="ds-tag ds-tag--teal">Stable</span>
+                  <span class="ds-tag ds-tag--blue">Info</span>
+                  <span class="ds-tag ds-tag--amber">Attention</span>
+                  <span class="ds-tag ds-tag--coral">Risk</span>
+                </div>
+                <div class="ds-comp-row">
+                  <button class="btn ds-btn ds-btn--primary" type="button" tabindex="-1">Primary</button>
+                  <button class="btn ds-btn" type="button" tabindex="-1">Secondary</button>
+                  <span class="ds-icon-btn"><i class="ph ph-magnifying-glass"></i></span>
+                </div>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Elevation &amp; Radius</p>
+                <div class="ds-elev-row">
+                  <div class="ds-elev-sample ds-elev-sample--1">Flat</div>
+                  <div class="ds-elev-sample ds-elev-sample--2">Card</div>
+                  <div class="ds-elev-sample ds-elev-sample--3">Modal</div>
+                </div>
+                <p class="ds-doc-card__text" style="margin-top:10px">Radius: sm 10px (inputs, nav) · card 16px. Surfaces are flat (no default card shadow); depth from 1px borders. Hover: border tint only — KPI may lift 1px; no stacked elevation shadows.</p>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Component · Donut Chart</p>
+                <p class="ds-doc-card__text">SVG stroke arcs · default 5.5px · hover 11.5px · 0.34s ease. Hover segment or legend row: active slice thickens, others dim (32% opacity), center <code>aria-live</code> updates. Track ring matches idle stroke. Coral accent = lead category.</p>
+                <div class="ds-comp-row" style="margin-top:10px">
+                  <span class="ds-legend-dot ds-legend-dot--accent"></span>
+                  <span class="ds-legend-dot ds-legend-dot--c2"></span>
+                  <span class="ds-legend-dot ds-legend-dot--c3"></span>
+                  <span class="ds-legend-dot ds-legend-dot--c4"></span>
+                </div>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Component · Legend &amp; Progress</p>
+                <p class="ds-doc-card__text">Row: dot + name + % + bar. Track = <code>color-mix(border 72%, surface)</code> full-width pill; fill = chart token gradient. Share list gap 4px (4 items); Breakdown gap 10px (3 items). Legend rows: <code>role="button"</code>, keyboard focus ring.</p>
+                <div style="margin-top:10px;max-width:220px">
+                  <div class="ds-legend-row ds-legend-row--key" style="padding:4px 0">
+                    <span class="ds-legend-dot ds-legend-dot--accent"></span>
+                    <span class="ds-legend-name">Boss Zhipin</span>
+                    <span class="ds-legend-val">38%</span>
+                    <div class="ds-legend-bar"><span class="ds-legend-bar__fill--accent" style="width:38%"></span></div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Component · Data Table</p>
+                <p class="ds-doc-card__text">Two layers: card → <code>ds-table-shell</code> (12px radius, 1px border). Inside: tinted header row + body rows split by horizontal rules only — no per-row boxes.</p>
+                <p class="ds-doc-card__text">Column align: Source left; numbers + Conv. right (<code>tabular-nums</code>); Status tags right. Hired column bold; highest Conv. auto-highlighted brand blue. Row height <code>--ds-table-row-h</code> (40px). Hover: brand-tint row bg; Source name turns brand blue.</p>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Component · Cost Summary</p>
+                <p class="ds-doc-card__text">Top: 3 chips — numeric value + uppercase label. Locked chip: dashed border + neutral bg, lock icon + “Total spend”; <code>aria-label="Restricted total spend"</code>.</p>
+                <p class="ds-doc-card__text">List rows: color dot + label + meta (<code>8 paid · 6 pending</code>). Progress: solid segment = paid, diagonal stripe = pending — amounts stay restricted (lock only on top chip). Hover: brand-tint background only. Compact auth line below list.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Component · Sidebar Brand</p>
+                <div class="ds-comp-row" style="align-items:center;gap:12px;margin-bottom:10px">
+                  <div class="ds-sidebar-brand__mark" style="width:36px;height:36px;font-size:16px"><i class="ph ph-users-three"></i></div>
+                  <div class="ds-sidebar-brand__name" style="font-size:14px">RecruitOS<span>Vendor &amp; Analytics</span></div>
+                </div>
+                <p class="ds-doc-card__text">Mark: blue gradient squircle 36×36. Hover on brand block: mark scale 1.08 + slight rotate, title → brand dark blue, area tint — no glow shadow. Respects <code>prefers-reduced-motion</code>.</p>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Component · Sidebar Navigation</p>
+                <p class="ds-doc-card__text">Items are <code>&lt;button&gt;</code> elements with icon + label; badges right-aligned via <code>margin-left: auto</code>. Icons sit in 28×28 rounded wells. Active: brand tint pill + icon well highlight (no shadow). Inactive hover: light brand wash + icon well tint + slight icon scale. Focus: brand outline ring.</p>
+                <p class="ds-doc-card__text">Mobile (≤768px): drawer off-canvas from left; top bar shows hamburger, compact brand, and active module pill synced via <code>data-nav-label</code>. Backdrop tap or Escape closes drawer; body scroll locked while open.</p>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Interaction &amp; Motion</p>
+                <ul class="ds-doc-list">
+                  <li><strong>Nav items</strong> — icon well tint + scale on hover; drawer slide 0.28s</li>
+                  <li><strong>Cards / KPI</strong> — border tint on hover; KPI translateY −1px</li>
+                  <li><strong>Table rows</strong> — brand 6–7% background tint</li>
+                  <li><strong>Donut</strong> — stroke thicken + peer dim; 0.34s ease</li>
+                  <li><strong>Cost items</strong> — background tint only (no translateX)</li>
+                  <li><strong>Entrance</strong> — fade-up stagger on New Design view; disabled when reduced-motion</li>
+                </ul>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--half">
+                <p class="ds-doc-card__label">Accessibility</p>
+                <ul class="ds-doc-list">
+                  <li>Legend rows: focusable, <code>aria-label</code> per slice, Enter/Space activates</li>
+                  <li>Donut center: <code>aria-live="polite"</code> for % + label changes</li>
+                  <li>Restricted spend: <code>aria-label</code> on top lock chip; progress bars use <code>role="img"</code> + paid/pending label</li>
+                  <li>Decorative icons: <code>aria-hidden="true"</code>; meaning carried by visible text or label</li>
+                  <li>Sidebar nav: native buttons, <code>aria-current="page"</code> on active item; drawer toggle <code>aria-expanded</code></li>
+                  <li>Display-only prototype: dashboard chrome buttons use <code>tabindex="-1"</code> except nav + doc demos</li>
+                </ul>
+              </section>
+
+              <section class="ds-doc-card ds-doc-card--wide">
+                <p class="ds-doc-card__label">Responsive · Breakpoints</p>
+                <p class="ds-doc-card__text">Below <strong>900px</strong>: bento panels stack single column; KPI grid 2 columns (1 column under 480px); chart blocks stack vertically. Below <strong>768px</strong>: fixed top bar + off-canvas drawer sidebar (hamburger, backdrop, Escape to close); performance table scrolls horizontally with <strong>Source</strong> column sticky. Nav items are focusable buttons with icon-well active/hover states; mobile pill shows current module label.</p>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Icons</p>
+                <p class="ds-doc-card__text">Phosphor Icons · Regular weight · 15–17px in nav, 16–18px in cards. Single stroke style throughout; no mixed icon sets.</p>
+                <div class="ds-comp-row" style="margin-top:10px;font-size:20px;color:var(--ds-smart-blue)">
+                  <i class="ph ph-squares-four"></i>
+                  <i class="ph ph-broadcast"></i>
+                  <i class="ph ph-bell"></i>
+                  <i class="ph ph-chart-line-up"></i>
+                  <i class="ph ph-lock-simple"></i>
+                </div>
+              </section>
+
+              <section class="ds-doc-card">
+                <p class="ds-doc-card__label">Component · KPI Card</p>
+                <article class="ds-metric ds-metric--full">
+                  <div class="ds-metric__head">
+                    <div class="ds-metric__icon"><i class="ph ph-broadcast"></i></div>
+                    <div class="ds-metric__label">Active Channels</div>
+                  </div>
+                  <div class="ds-metric__value">8</div>
+                  <div class="ds-metric__foot">
+                    <span class="ds-tag ds-tag--teal"><i class="ph ph-trend-up" style="font-size:14px"></i> +2 this month</span>
+                    <span class="ds-metric__meta">vs. 6 last period</span>
+                  </div>
+                </article>
+                <p class="ds-doc-card__text" style="margin-top:10px">Structure: icon + label row → display value → trend tag + comparison caption. Hover: border tint, slight lift, icon background deepen.</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const page = document.getElementById('page');
+    const mainEl = document.querySelector('main');
+    const sidebarUpdated = document.getElementById('sidebar-updated');
+    const sidebarLegacy = document.getElementById('sidebar-legacy');
+    const toolbar = document.getElementById('toolbar');
+    const tabs = document.querySelectorAll('.view-tab');
+    const panels = document.querySelectorAll('.view-panel');
+    const paletteButtons = document.querySelectorAll('.tweak-palette');
+    let tweakPalette = 'vivid';
+
+    function setPalette(name) {
+      tweakPalette = name;
+      paletteButtons.forEach((btn) => {
+        const on = btn.dataset.palette === name;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-selected', on);
+      });
+    }
+
+    function applyPagePalette(view) {
+      if (view === 'before') {
+        delete page.dataset.palette;
+      } else if (view === 'updated' || view === 'tweak') {
+        page.dataset.palette = tweakPalette;
+      } else {
+        page.dataset.palette = 'vivid';
+      }
+    }
+
+    function switchView(view) {
+      const isTweak = view === 'tweak';
+      tabs.forEach((tab) => {
+        const active = tab.dataset.view === view;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', active);
+      });
+      panels.forEach((panel) => {
+        const show = panel.id === `view-${view}` || (isTweak && panel.id === 'view-updated');
+        panel.classList.toggle('active', show);
+      });
+      mainEl.classList.toggle('tweak-mode', isTweak);
+
+      const isBefore = view === 'before';
+      page.classList.toggle('theme-updated', !isBefore);
+      sidebarUpdated.hidden = isBefore;
+      sidebarLegacy.hidden = !isBefore;
+      toolbar.style.display = (view === 'design-system' || isTweak) ? 'none' : '';
+      applyPagePalette(view);
+      if (isTweak) setPalette(tweakPalette);
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => switchView(tab.dataset.view));
+    });
+
+    paletteButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setPalette(btn.dataset.palette);
+        page.dataset.palette = btn.dataset.palette;
+      });
+    });
+
+    setPalette('vivid');
+
+    const SLICE_COLORS = {
+      accent: '--ds-chart-accent',
+      c2: '--ds-chart-2',
+      c3: '--ds-chart-3',
+      c4: '--ds-chart-4',
+    };
+    const DONUT_CX = 50;
+    const DONUT_CY = 50;
+    const DONUT_MID_R = 44;
+    const SLICE_GAP = 0.35;
+
+    function polar(cx, cy, r, angle) {
+      const rad = (angle - 90) * Math.PI / 180;
+      return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+    }
+
+    function strokeArc(cx, cy, r, start, end) {
+      const sweep = end - start;
+      if (sweep <= 0) return '';
+      const large = sweep > 180 ? 1 : 0;
+      const p0 = polar(cx, cy, r, start);
+      const p1 = polar(cx, cy, r, end);
+      return `M ${p0.x} ${p0.y} A ${r} ${r} 0 ${large} 1 ${p1.x} ${p1.y}`;
+    }
+
+    function initInteractiveDonuts(root = document) {
+      root.querySelectorAll('.ds-donut--interactive').forEach((donut) => {
+        if (donut.dataset.ready) return;
+        const slices = JSON.parse(donut.dataset.slices || '[]');
+        const chartBlock = donut.closest('.ds-chart-block');
+        const svg = donut.querySelector('.ds-donut__svg');
+        const trackG = svg.querySelector('.ds-donut__track-ring');
+        const slicesG = svg.querySelector('.ds-donut__slices');
+        const keyEl = donut.querySelector('.ds-donut__key');
+        const labelEl = donut.querySelector('.ds-donut__key-label');
+        const legendRows = chartBlock ? [...chartBlock.querySelectorAll('.ds-legend-row')] : [];
+        const defaultRow = chartBlock?.querySelector('.ds-legend-row--key') || legendRows[0];
+
+        const track = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        track.setAttribute('cx', String(DONUT_CX));
+        track.setAttribute('cy', String(DONUT_CY));
+        track.setAttribute('r', String(DONUT_MID_R));
+        trackG.appendChild(track);
+
+        const controllers = [];
+
+        function resetCenter() {
+          if (!defaultRow || !keyEl || !labelEl) return;
+          keyEl.textContent = defaultRow.querySelector('.ds-legend-val')?.textContent || '';
+          labelEl.textContent = defaultRow.querySelector('.ds-legend-name')?.textContent || '';
+        }
+
+        function highlight(index) {
+          const active = index >= 0;
+          controllers.forEach((ctrl, i) => {
+            const hovered = i === index;
+            ctrl.g.classList.toggle('is-hovered', hovered);
+            ctrl.g.classList.toggle('is-dimmed', active && !hovered);
+            legendRows[i]?.classList.toggle('is-slice-hovered', hovered);
+          });
+          if (active && slices[index]) {
+            keyEl.textContent = `${slices[index].pct}%`;
+            labelEl.textContent = legendRows[index]?.querySelector('.ds-legend-name')?.textContent?.trim() || slices[index].label;
+          } else {
+            resetCenter();
+          }
+        }
+
+        let angle = 0;
+        slices.forEach((slice, index) => {
+          const sweep = (slice.pct / 100) * 360;
+          const start = angle;
+          const end = angle + sweep;
+          angle = end;
+          const mid = start + sweep / 2;
+
+          const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          g.classList.add('ds-donut__slice');
+          g.dataset.index = String(index);
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', strokeArc(DONUT_CX, DONUT_CY, DONUT_MID_R, start + SLICE_GAP / 2, end - SLICE_GAP / 2));
+          path.setAttribute('stroke', `var(${SLICE_COLORS[slice.token] || SLICE_COLORS.c2})`);
+
+          g.appendChild(path);
+          slicesG.appendChild(g);
+          controllers.push({ g, mid });
+
+          g.addEventListener('mouseenter', () => highlight(index));
+        });
+
+        legendRows.forEach((row, index) => {
+          const name = row.querySelector('.ds-legend-name')?.textContent?.trim() || '';
+          const val = row.querySelector('.ds-legend-val')?.textContent?.trim() || '';
+          row.setAttribute('role', 'button');
+          row.setAttribute('tabindex', '0');
+          row.setAttribute('aria-label', `${name}, ${val}`);
+          row.addEventListener('mouseenter', () => highlight(index));
+          row.addEventListener('focus', () => highlight(index));
+          row.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              highlight(index);
+            }
+          });
+        });
+
+        chartBlock?.addEventListener('mouseleave', () => highlight(-1));
+        chartBlock?.addEventListener('focusout', (e) => {
+          if (!chartBlock.contains(e.relatedTarget)) highlight(-1);
+        });
+
+        donut.dataset.ready = '1';
+      });
+    }
+
+    function initPerformanceTable(root = document) {
+      root.querySelectorAll('.ds-table--performance tbody').forEach((tbody) => {
+        let max = -1;
+        let peakCell = null;
+        tbody.querySelectorAll('tr').forEach((row) => {
+          const conv = row.cells[4];
+          if (!conv) return;
+          const val = parseFloat(conv.textContent);
+          if (!Number.isNaN(val) && val > max) {
+            max = val;
+            peakCell = conv;
+          }
+        });
+        peakCell?.classList.add('ds-table__conv--peak');
+      });
+    }
+
+    const appSidebar = document.getElementById('app-sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const mobilePageLabel = document.getElementById('mobile-page-label');
+    const MOBILE_BP = '(max-width: 768px)';
+    const mobileMq = window.matchMedia(MOBILE_BP);
+
+    function isMobileLayout() {
+      return mobileMq.matches;
+    }
+
+    function openSidebar() {
+      appSidebar?.classList.add('is-open');
+      if (sidebarBackdrop) {
+        sidebarBackdrop.hidden = false;
+        requestAnimationFrame(() => sidebarBackdrop.classList.add('is-visible'));
+        sidebarBackdrop.setAttribute('aria-hidden', 'false');
+      }
+      sidebarToggle?.setAttribute('aria-expanded', 'true');
+      sidebarToggle?.setAttribute('aria-label', t('sidebar.close'));
+      document.body.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+      appSidebar?.classList.remove('is-open');
+      sidebarBackdrop?.classList.remove('is-visible');
+      sidebarToggle?.setAttribute('aria-expanded', 'false');
+      sidebarToggle?.setAttribute('aria-label', t('sidebar.open'));
+      document.body.classList.remove('sidebar-open');
+      sidebarBackdrop?.setAttribute('aria-hidden', 'true');
+      window.setTimeout(() => {
+        if (!appSidebar?.classList.contains('is-open') && sidebarBackdrop) {
+          sidebarBackdrop.hidden = true;
+        }
+      }, 260);
+    }
+
+    function initMobileSidebar() {
+      sidebarToggle?.addEventListener('click', () => {
+        if (appSidebar?.classList.contains('is-open')) closeSidebar();
+        else openSidebar();
+      });
+      sidebarBackdrop?.addEventListener('click', closeSidebar);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && appSidebar?.classList.contains('is-open')) closeSidebar();
+      });
+      mobileMq.addEventListener('change', (e) => {
+        if (!e.matches) closeSidebar();
+      });
+    }
+
+    function setActiveNavItem(btn, panel) {
+      panel.querySelectorAll('.ds-nav-item, .nav-item').forEach((el) => {
+        el.classList.remove('active');
+        el.removeAttribute('aria-current');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-current', 'page');
+      syncMobileNavLabel(btn);
+      if (isMobileLayout()) closeSidebar();
+    }
+
+    function initSidebarNav() {
+      [sidebarUpdated, sidebarLegacy].forEach((panel) => {
+        if (!panel) return;
+        panel.querySelectorAll('[data-nav-label]').forEach((btn) => {
+          btn.addEventListener('click', () => setActiveNavItem(btn, panel));
+        });
+      });
+    }
+
+    function initTableScroll(root = document) {
+      root.querySelectorAll('.ds-table-scroll').forEach((scroll) => {
+        const table = scroll.querySelector('.ds-table--performance');
+        if (!table) return;
+        const update = () => {
+          table.classList.toggle('is-scrolled', scroll.scrollLeft > 4);
+        };
+        scroll.addEventListener('scroll', update, { passive: true });
+        update();
+      });
+    }
+
+    const I18N = {
+      en: {
+        'lang.switch': '中文',
+        'lang.toggleAria': 'Switch to Chinese',
+        'tabs.listAria': 'Prototype views',
+        'tabs.original': 'Original',
+        'tabs.newDesign': 'New Design',
+        'tabs.specs': 'Specs',
+        'tabs.themes': 'Themes',
+        'brand.subtitle': 'Vendor & Analytics',
+        'nav.group.main': 'Main',
+        'nav.group.insights': 'Insights',
+        'nav.group.admin': 'Admin',
+        'nav.dashboard': 'Dashboard',
+        'nav.channel': 'Channel Management',
+        'nav.headhunter': 'Headhunter Management',
+        'nav.headhunterFees': 'Headhunter Fees',
+        'nav.backgroundCheck': 'Background Check Costs',
+        'nav.costAnalysis': 'Recruiting Cost Analysis',
+        'nav.analytics': 'Recruiting Analytics',
+        'nav.reminders': 'Reminders',
+        'nav.fileCenter': 'File Center',
+        'nav.contract': 'Contract Management',
+        'nav.settings': 'System Settings',
+        'role.hrOps': 'HR Operations',
+        'welcome.greeting': 'Good morning, Terence',
+        'welcome.summary': 'You have <b>12 reminders</b>, <b>3 contract risks</b>, and <b>25 hires</b> this month across 8 active channels.',
+        'toolbar.export': 'Export Report',
+        'kpi.activeChannels': 'Active Channels',
+        'kpi.contractRisk': 'Contract Risk',
+        'kpi.pendingReminders': 'Pending Reminders',
+        'kpi.costItems': 'Cost Items',
+        'kpi.channels.delta': '+2 this month',
+        'kpi.channels.meta': 'vs. 6 last period',
+        'kpi.contract.delta': '2 expiring',
+        'kpi.contract.meta': 'within 45 days',
+        'kpi.reminders.payment': '5 payment',
+        'kpi.reminders.meta': '7 contract · 0 other',
+        'kpi.cost.paid': '28 paid',
+        'kpi.cost.meta': '16 pending · restricted',
+        'card.sourcePerformance': 'Source Performance',
+        'card.sourcePerformance.sub': '542 resumes · 41 offers · 25 hired',
+        'card.sourceShare': 'Source Share',
+        'card.sourceShare.sub': 'By hires, Jun 2026',
+        'card.costSummary': 'Recruiting Cost Summary',
+        'card.costSummary.sub': '44 items tracked',
+        'card.costBreakdown': 'Cost Breakdown',
+        'card.costBreakdown.sub': 'By category',
+        'table.source': 'Source',
+        'table.resumes': 'Resumes',
+        'table.offers': 'Offers',
+        'table.hired': 'Hired',
+        'table.conv': 'Conv.',
+        'table.status': 'Status',
+        'status.stable': 'Stable',
+        'status.seniorRoles': 'Senior roles',
+        'status.reviewCost': 'Review cost',
+        'status.growing': 'Growing',
+        'status.earlyTalent': 'Early talent',
+        'chart.headhunter': 'Headhunter',
+        'chart.channel': 'Channel',
+        'chart.backgroundCheck': 'Background check',
+        'chart.other': 'Other',
+        'cost.paid': 'Paid',
+        'cost.pending': 'Pending',
+        'cost.totalSpend': 'Total spend',
+        'cost.restrictedSpend': 'Restricted total spend',
+        'cost.headhunterFees': 'Headhunter fees',
+        'cost.channelFees': 'Channel fees',
+        'cost.backgroundChecks': 'Background checks',
+        'cost.meta': '<b>{paid}</b> paid · {pending} pending',
+        'cost.progress': '{paid} of {total} items paid, {pending} pending',
+        'cost.restricted': 'Amounts restricted',
+        'cost.requestAccess': 'Request access',
+        'sidebar.open': 'Open navigation',
+        'sidebar.close': 'Close navigation',
+      },
+      zh: {
+        'lang.switch': 'EN',
+        'lang.toggleAria': '切换为英文',
+        'tabs.listAria': '原型视图',
+        'tabs.original': '原版',
+        'tabs.newDesign': '新设计',
+        'tabs.specs': '设计规范',
+        'tabs.themes': '配色',
+        'brand.subtitle': '供应商与数据分析',
+        'nav.group.main': '主要',
+        'nav.group.insights': '洞察',
+        'nav.group.admin': '管理',
+        'nav.dashboard': '仪表盘',
+        'nav.channel': '渠道管理',
+        'nav.headhunter': '猎头管理',
+        'nav.headhunterFees': '猎头费用',
+        'nav.backgroundCheck': '背调费用',
+        'nav.costAnalysis': '招聘成本分析',
+        'nav.analytics': '招聘数据分析',
+        'nav.reminders': '提醒事项',
+        'nav.fileCenter': '文件中心',
+        'nav.contract': '合同管理',
+        'nav.settings': '系统设置',
+        'role.hrOps': '人力资源运营',
+        'welcome.greeting': '早上好，Terence',
+        'welcome.summary': '本月共有 <b>12 条提醒</b>、<b>3 项合同风险</b>，<b>25 人已入职</b>，来自 8 个活跃渠道。',
+        'toolbar.export': '导出报告',
+        'kpi.activeChannels': '活跃渠道',
+        'kpi.contractRisk': '合同风险',
+        'kpi.pendingReminders': '待处理提醒',
+        'kpi.costItems': '费用项',
+        'kpi.channels.delta': '本月 +2',
+        'kpi.channels.meta': '上期 6 个',
+        'kpi.contract.delta': '2 项即将到期',
+        'kpi.contract.meta': '45 天内',
+        'kpi.reminders.payment': '5 笔付款',
+        'kpi.reminders.meta': '7 份合同 · 0 其他',
+        'kpi.cost.paid': '28 已付',
+        'kpi.cost.meta': '16 待付 · 金额受限',
+        'card.sourcePerformance': '渠道表现',
+        'card.sourcePerformance.sub': '542 份简历 · 41 个 offer · 25 人已入职',
+        'card.sourceShare': '渠道占比',
+        'card.sourceShare.sub': '按入职数 · 2026年6月',
+        'card.costSummary': '招聘费用汇总',
+        'card.costSummary.sub': '共 44 项',
+        'card.costBreakdown': '费用构成',
+        'card.costBreakdown.sub': '按类别',
+        'table.source': '渠道',
+        'table.resumes': '简历',
+        'table.offers': 'Offer',
+        'table.hired': '入职',
+        'table.conv': '转化率',
+        'table.status': '状态',
+        'status.stable': '稳定',
+        'status.seniorRoles': '高级岗位',
+        'status.reviewCost': '费用复核',
+        'status.growing': '增长中',
+        'status.earlyTalent': '早期人才',
+        'chart.headhunter': '猎头',
+        'chart.channel': '渠道',
+        'chart.backgroundCheck': '背调',
+        'chart.other': '其他',
+        'cost.paid': '已付',
+        'cost.pending': '待付',
+        'cost.totalSpend': '总支出',
+        'cost.restrictedSpend': '总支出金额受限',
+        'cost.headhunterFees': '猎头费用',
+        'cost.channelFees': '渠道费用',
+        'cost.backgroundChecks': '背调费用',
+        'cost.meta': '<b>{paid}</b> 已付 · {pending} 待付',
+        'cost.progress': '共 {total} 项，{paid} 项已付，{pending} 项待付',
+        'cost.restricted': '金额受限',
+        'cost.requestAccess': '申请权限',
+        'sidebar.open': '打开导航',
+        'sidebar.close': '关闭导航',
+      },
+    };
+
+    let locale = 'en';
+    const langToggle = document.getElementById('lang-toggle');
+    const langToggleMobile = document.getElementById('lang-toggle-mobile');
+    const LANG_KEY = 'dashboard-locale';
+
+    function t(key) {
+      return I18N[locale]?.[key] ?? I18N.en[key] ?? key;
+    }
+
+    function formatTemplate(template, vars) {
+      return template.replace(/\{(\w+)\}/g, (_, name) => vars[name] ?? '');
+    }
+
+    function syncMobileNavLabel(btn) {
+      if (!mobilePageLabel) return;
+      const key = btn?.dataset?.navKey;
+      mobilePageLabel.textContent = key ? t(`nav.${key}`) : mobilePageLabel.textContent;
+    }
+
+    function refreshLegendAria() {
+      document.querySelectorAll('#view-updated .ds-legend-row').forEach((row) => {
+        const name = row.querySelector('.ds-legend-name')?.textContent?.trim() || '';
+        const val = row.querySelector('.ds-legend-val')?.textContent?.trim() || '';
+        row.setAttribute('aria-label', `${name}, ${val}`);
+      });
+    }
+
+    function refreshDonutDefaults() {
+      document.querySelectorAll('#view-updated .ds-donut--interactive').forEach((donut) => {
+        const chartBlock = donut.closest('.ds-chart-block');
+        const defaultRow = chartBlock?.querySelector('.ds-legend-row--key');
+        const keyEl = donut.querySelector('.ds-donut__key');
+        const labelEl = donut.querySelector('.ds-donut__key-label');
+        if (!defaultRow || !keyEl || !labelEl) return;
+        if (!donut.querySelector('.ds-donut__slice.is-hovered')) {
+          keyEl.textContent = defaultRow.querySelector('.ds-legend-val')?.textContent || '';
+          labelEl.textContent = defaultRow.querySelector('.ds-legend-name')?.textContent || '';
+        }
+      });
+    }
+
+    function syncLangToggleButtons() {
+      [langToggle, langToggleMobile].forEach((btn) => {
+        if (!btn) return;
+        btn.textContent = t('lang.switch');
+        btn.setAttribute('aria-label', t('lang.toggleAria'));
+      });
+      const expanded = sidebarToggle?.getAttribute('aria-expanded') === 'true';
+      sidebarToggle?.setAttribute('aria-label', t(expanded ? 'sidebar.close' : 'sidebar.open'));
+    }
+
+    function applyLocale(nextLocale) {
+      locale = nextLocale === 'zh' ? 'zh' : 'en';
+      document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
+      try { localStorage.setItem(LANG_KEY, locale); } catch (_) {}
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        if (key) el.textContent = t(key);
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const key = el.dataset.i18nHtml;
+        if (!key) return;
+        const vars = {
+          paid: el.dataset.i18nPaid,
+          pending: el.dataset.i18nPending,
+          total: el.dataset.i18nTotal,
+        };
+        el.innerHTML = formatTemplate(t(key), vars);
+      });
+
+      document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+        const key = el.dataset.i18nAria;
+        if (!key) return;
+        const vars = {
+          paid: el.dataset.i18nPaid,
+          pending: el.dataset.i18nPending,
+          total: el.dataset.i18nTotal,
+        };
+        el.setAttribute('aria-label', formatTemplate(t(key), vars));
+      });
+
+      const activeNav = document.querySelector('#sidebar-updated .ds-nav-item.active[data-nav-key]');
+      if (activeNav) syncMobileNavLabel(activeNav);
+
+      refreshLegendAria();
+      refreshDonutDefaults();
+      syncLangToggleButtons();
+    }
+
+    function initLangToggle() {
+      try {
+        const saved = localStorage.getItem(LANG_KEY);
+        if (saved === 'zh' || saved === 'en') locale = saved;
+      } catch (_) {}
+      applyLocale(locale);
+
+      const toggle = () => applyLocale(locale === 'en' ? 'zh' : 'en');
+      langToggle?.addEventListener('click', toggle);
+      langToggleMobile?.addEventListener('click', toggle);
+    }
+
+    initInteractiveDonuts();
+    initPerformanceTable();
+    initTableScroll();
+    initMobileSidebar();
+    initSidebarNav();
+    initLangToggle();
+  </script>
+</body>
+</html>

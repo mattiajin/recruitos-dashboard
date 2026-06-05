@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>招聘供应商与招聘效能分析系统 - Phase 1 原型</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #2563eb;
+      --soft: #eef4ff;
+      --warn: #f59e0b;
+      --danger: #dc2626;
+      --ok: #16a34a;
+      --shadow: 0 8px 24px rgba(15, 23, 42, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { font-size: 18px; margin: 0; }
+    header span { color: var(--muted); font-size: 13px; }
+    .layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: calc(100vh - 57px);
+    }
+    nav {
+      border-right: 1px solid var(--line);
+      background: #fff;
+      padding: 18px 14px;
+      position: sticky;
+      top: 57px;
+      height: calc(100vh - 57px);
+      overflow: auto;
+    }
+    nav a {
+      display: block;
+      color: #374151;
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 10px;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    nav a:hover { background: var(--soft); color: var(--primary); }
+    main { padding: 22px; max-width: 1440px; }
+    section { margin-bottom: 24px; }
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 12px;
+    }
+    .section-title h2 { margin: 0; font-size: 20px; }
+    .section-title p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+    .metric {
+      cursor: pointer;
+      transition: .15s ease;
+    }
+    .metric:hover { transform: translateY(-2px); border-color: #bfdbfe; }
+    .metric .label { color: var(--muted); font-size: 13px; }
+    .metric .value { font-size: 26px; font-weight: 700; margin-top: 8px; }
+    .metric .note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .small-input, .btn, select {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 9px;
+      padding: 6px 9px;
+      font-size: 12px;
+      color: #374151;
+    }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      cursor: pointer;
+    }
+    .btn.secondary {
+      background: #fff;
+      color: #374151;
+      border-color: var(--line);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      padding: 10px 8px;
+      vertical-align: middle;
+    }
+    th { color: #4b5563; font-weight: 600; background: #fafafa; }
+    tr:last-child td { border-bottom: none; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #f3f4f6;
+      color: #374151;
+      white-space: nowrap;
+    }
+    .tag.ok { background: #dcfce7; color: #166534; }
+    .tag.warn { background: #fef3c7; color: #92400e; }
+    .tag.danger { background: #fee2e2; color: #991b1b; }
+    .tag.info { background: #dbeafe; color: #1e40af; }
+    .muted { color: var(--muted); }
+    .pie {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: conic-gradient(#2563eb 0 38%, #16a34a 38% 62%, #f59e0b 62% 80%, #ef4444 80% 100%);
+      margin: 8px auto;
+      position: relative;
+    }
+    .pie::after {
+      content: "";
+      position: absolute;
+      inset: 43px;
+      border-radius: 50%;
+      background: white;
+    }
+    .bars { display: grid; gap: 10px; margin-top: 8px; }
+    .bar-row { display: grid; grid-template-columns: 90px 1fr 54px; gap: 8px; align-items: center; font-size: 13px; }
+    .bar-bg { height: 10px; background: #eef2f7; border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--primary); border-radius: 99px; }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .flow div {
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fbfdff;
+      font-size: 13px;
+    }
+    .arrow { color: var(--primary); font-weight: 700; }
+    .auth-mask {
+      background: repeating-linear-gradient(135deg, #f9fafb, #f9fafb 8px, #f3f4f6 8px, #f3f4f6 16px);
+      color: #6b7280;
+      border: 1px dashed #cbd5e1;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .notice {
+      border-left: 4px solid var(--primary);
+      background: #eff6ff;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #1e3a8a;
+    }
+    .red-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--danger);
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    @media (max-width: 1000px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+      .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>招聘供应商与招聘效能分析系统</h1>
+      <span>Phase 1 前端 mock 原型｜数据链路与模块职责预览</span>
+    </div>
+    <span>zh-CN / en-US · Moka 聚合数据 mock · 不接真实 API</span>
+  </header>
+
+  <div class="layout">
+    <nav>
+      <a href="#dashboard">总览 Dashboard</a>
+      <a href="#channels">招聘渠道管理</a>
+      <a href="#headhunters">猎头管理</a>
+      <a href="#headhunter-fees">猎头费管理</a>
+      <a href="#background-check">背调费用录入</a>
+      <a href="#costs">招聘成本分析</a>
+      <a href="#analytics">招聘数据分析</a>
+      <a href="#reminders">提醒中心</a>
+      <a href="#files">文件中心</a>
+      <a href="#contracts">合同管理</a>
+      <a href="#settings">系统设置</a>
+      <a href="#flow">数据链路</a>
+    </nav>
+
+    <main>
+      <section id="dashboard">
+        <div class="section-title">
+          <div>
+            <h2>总览 Dashboard</h2>
+            <p>管理驾驶舱：点击卡片跳转相关模块；成本金额需要管理员授权。</p>
+          </div>
+          <div class="toolbar">
+            <input class="small-input" type="date" value="2026-06-01">
+            <input class="small-input" type="date" value="2026-06-30">
+            <button class="btn secondary">最近同步：09:30</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <a class="card metric span-3" href="#channels" style="text-decoration:none;color:inherit">
+            <div class="label">活跃招聘渠道</div>
+            <div class="value">8</div>
+            <div class="note">点击查看招聘渠道管理</div>
+          </a>
+          <a class="card metric span-3" href="#contracts" style="text-decoration:none;color:inherit">
+            <div class="label">合同风险</div>
+            <div class="value">3</div>
+            <div class="note">点击查看合同到期情况</div>
+          </a>
+          <a class="card metric span-3" href="#reminders" style="text-decoration:none;color:inherit">
+            <div class="label">待处理提醒</div>
+            <div class="value">12</div>
+            <div class="note">付款提醒 + 合同到期提醒</div>
+          </a>
+          <a class="card metric span-3" href="#costs" style="text-decoration:none;color:inherit">
+            <div class="label">本月招聘成本状态</div>
+            <div class="value">授权可见</div>
+            <div class="note">点击查看成本分析</div>
+          </a>
+
+          <div class="card span-8">
+            <h3>招聘来源表现简表</h3>
+            <p class="muted">Dashboard 是全局视角，可包含招聘平台和猎头来源；/channels 页面只管理招聘平台。</p>
+            <table>
+              <thead><tr><th>来源</th><th>简历</th><th>Offer</th><th>入职</th><th>转化率</th><th>状态</th></tr></thead>
+              <tbody>
+                <tr><td>Boss 直聘</td><td>320</td><td>18</td><td>12</td><td>3.75%</td><td><span class="tag ok">表现稳定</span></td></tr>
+                <tr><td>LinkedIn</td><td>180</td><td>14</td><td>8</td><td>4.44%</td><td><span class="tag info">高端岗位有效</span></td></tr>
+                <tr><td>猎头推荐</td><td>42</td><td>9</td><td>5</td><td>11.90%</td><td><span class="tag warn">成本需关注</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card span-4">
+            <h3>来源占比</h3>
+            <div class="pie"></div>
+            <p class="muted">饼图 mock：按 Offer / 入职占比展示。</p>
+          </div>
+
+          <div class="card span-8">
+            <h3>招聘成本简表</h3>
+            <div class="auth-mask">需管理员授权查看招聘成本金额</div>
+          </div>
+          <div class="card span-4">
+            <h3>成本占比</h3>
+            <div class="pie"></div>
+            <p class="muted">猎头费、招聘渠道、背调费三类汇总。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="channels">
+        <div class="section-title">
+          <div>
+            <h2>招聘渠道管理</h2>
+            <p>只管理 Boss、LinkedIn、脉脉、智联等招聘平台渠道，不包含猎头。</p>
+          </div>
+          <div class="toolbar">
+            <button class="btn">上传渠道文件</button>
+            <input class="small-input" type="date" value="2026-06-01">
+            <input class="small-input" type="date" value="2026-06-30">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card span-8">
+            <h3>招聘渠道表</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>渠道</th><th>Offer</th><th>入职</th><th title="单 Offer 成本 = 渠道费用 / Offer 数">单 Offer 成本 ⓘ</th><th>合同到期</th><th>金额权限</th><th>是否付款</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Boss 直聘</td><td>18</td><td>12</td><td>需管理员授权</td><td>2026-09-30</td><td><span class="tag warn">授权可见</span></td><td><select><option>否</option><option>是</option></select></td></tr>
+                <tr><td>LinkedIn Recruiter</td><td>14</td><td>8</td><td>需管理员授权</td><td>2026-12-31</td><td><span class="tag warn">授权可见</span></td><td><select><option>是</option><option>否</option></select></td></tr>
+                <tr><td>脉脉</td><td>9</td><td>4</td><td>需管理员授权</td><td>2026-07-15</td><td><span class="tag warn">授权可见</span></td><td><select><option>否</option><option>是</option></select></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card span-4">
+            <h3>渠道转化占比</h3>
+            <div class="pie"></div>
+            <details>
+              <summary>招聘渠道分析与建议</summary>
+              <p class="muted">LinkedIn 高端岗位转化较好；Boss 量大但需要关注简历有效率；脉脉合同即将到期且未付款，应进入提醒中心。</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="headhunters">
+        <div class="section-title">
+          <div>
+            <h2>猎头管理</h2>
+            <p>维护猎头公司、合同关键条款、费率、保证期/保护期、擅长岗位和成功合作次数。</p>
+          </div>
+          <div class="toolbar">
+            <button class="btn">上传猎头合同/报价单</button>
+            <input class="small-input" type="date" value="2026-06-01">
+            <input class="small-input" type="date" value="2026-06-30">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <h3>擅长岗位分析</h3>
+            <div class="pie"></div>
+          </div>
+          <div class="card span-6">
+            <h3>成功合作次数</h3>
+            <div class="bars">
+              <div class="bar-row"><span>🏆 Alpha</span><div class="bar-bg"><div class="bar-fill" style="width:92%"></div></div><b>23</b></div>
+              <div class="bar-row"><span>👑 Beta</span><div class="bar-bg"><div class="bar-fill" style="width:74%"></div></div><b>18</b></div>
+              <div class="bar-row"><span>👑 Gamma</span><div class="bar-bg"><div class="bar-fill" style="width:60%"></div></div><b>14</b></div>
+            </div>
+          </div>
+          <div class="card span-12">
+            <h3>猎头公司明细</h3>
+            <table>
+              <thead><tr><th>排名</th><th>猎头公司</th><th>擅长岗位</th><th>费率</th><th>保证期</th><th>成功合作</th><th>操作</th></tr></thead>
+              <tbody>
+                <tr><td>🏆 1</td><td>Alpha Search</td><td>技术高管 / AI</td><td>22%</td><td>6个月</td><td>23</td><td><button class="btn secondary">编辑</button></td></tr>
+                <tr><td>👑 2</td><td>Beta Talent</td><td>销售 / 海外</td><td>20%</td><td>3个月</td><td>18</td><td><button class="btn secondary">编辑</button></td></tr>
+              </tbody>
+            </table>
+            <details>
+              <summary>合同关键条款摘要</summary>
+              <p class="muted">条款通过上传文件生成 PendingChange，人工确认后更新 mock 条款；不直接产生付款状态。</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="headhunter-fees">
+        <div class="section-title">
+          <div>
+            <h2>猎头费管理</h2>
+            <p>猎头费用明细和付款状态维护入口；Moka Offer 匹配需 PendingChange 确认。</p>
+          </div>
+          <div class="toolbar">
+            <input class="small-input" type="date" value="2026-06-01">
+            <input class="small-input" type="date" value="2026-06-30">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-5">
+            <h3>按猎头公司费用统计</h3>
+            <div class="bars">
+              <div class="bar-row"><span>Alpha</span><div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div><b>授权</b></div>
+              <div class="bar-row"><span>Beta</span><div class="bar-bg"><div class="bar-fill" style="width:66%"></div></div><b>授权</b></div>
+              <div class="bar-row"><span>Gamma</span><div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div><b>授权</b></div>
+            </div>
+          </div>
+          <div class="card span-7">
+            <h3><span class="red-dot"></span>自动匹配变更待确认 3</h3>
+            <details>
+              <summary>展开查看 PendingChange</summary>
+              <p class="muted">Moka 猎头 Offer 匹配后，需人工确认后才进入猎头费明细。</p>
+            </details>
+          </div>
+          <div class="card span-12">
+            <h3>猎头费明细</h3>
+            <table>
+              <thead><tr><th>猎头公司</th><th>候选人代号</th><th>金额</th><th>付款节点</th><th>负责人</th><th>是否付款</th></tr></thead>
+              <tbody>
+                <tr><td>Alpha Search</td><td>HH-2026-001</td><td>管理员授权可见</td><td>2026-07-05</td><td>Terence</td><td><select><option>否</option><option>是</option></select></td></tr>
+                <tr><td>Beta Talent</td><td>HH-2026-002</td><td>管理员授权可见</td><td>2026-08-15</td><td>Recruiter A</td><td><select><option>是</option><option>否</option></select></td></tr>
+              </tbody>
+            </table>
+            <details><summary>人工新增猎头费</summary><p class="muted">默认收起，避免页面信息过载。</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section id="background-check">
+        <div class="section-title">
+          <div>
+            <h2>背调费用录入</h2>
+            <p>背调费用维护入口，支持多币种、mock 汇率、人民币折算、人工付款状态。</p>
+          </div>
+        </div>
+        <div class="card">
+          <table>
+            <thead><tr><th>背调公司</th><th>币种</th><th>原币金额</th><th>人民币折算</th><th>付款人</th><th>是否付款</th></tr></thead>
+            <tbody>
+              <tr><td>CheckPro</td><td>USD</td><td>800</td><td>管理员授权可见</td><td>HR Ops</td><td><select><option>否</option><option>是</option></select></td></tr>
+              <tr><td>Asia Verify</td><td>SGD</td><td>1200</td><td>管理员授权可见</td><td>HR Ops</td><td><select><option>是</option><option>否</option></select></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="costs">
+        <div class="section-title">
+          <div>
+            <h2>招聘成本分析</h2>
+            <p>只做汇总分析，数据来源：招聘渠道管理费用 + 猎头费管理费用 + 背调费用录入费用。</p>
+          </div>
+          <div class="toolbar">
+            <input class="small-input" type="date" value="2026-06-01">
+            <input class="small-input" type="date" value="2026-06-30">
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-4"><h3>已付款合计</h3><div class="auth-mask">需管理员授权</div></div>
+          <div class="card span-4"><h3>待付款合计</h3><div class="auth-mask">需管理员授权</div></div>
+          <div class="card span-4"><h3>总费用合计</h3><div class="auth-mask">需管理员授权</div></div>
+          <div class="card span-6">
+            <h3>成本模块占比</h3>
+            <div class="pie"></div>
+          </div>
+          <div class="card span-6">
+            <h3>已付款 / 待付款</h3>
+            <div class="bars">
+              <div class="bar-row"><span>猎头费</span><div class="bar-bg"><div class="bar-fill" style="width:70%"></div></div><b>待付</b></div>
+              <div class="bar-row"><span>渠道费</span><div class="bar-bg"><div class="bar-fill" style="width:45%"></div></div><b>待付</b></div>
+              <div class="bar-row"><span>背调费</span><div class="bar-bg"><div class="bar-fill" style="width:20%"></div></div><b>待付</b></div>
+            </div>
+          </div>
+          <div class="card span-12">
+            <h3>汇总表</h3>
+            <table>
+              <thead><tr><th>来源模块</th><th>费用类型</th><th>金额</th><th>数据来源</th><th>是否付款</th></tr></thead>
+              <tbody>
+                <tr><td>招聘渠道管理</td><td>渠道费</td><td>需管理员授权</td><td>/channels</td><td><span class="tag warn">请到来源模块维护</span></td></tr>
+                <tr><td>猎头费管理</td><td>猎头费</td><td>需管理员授权</td><td>/headhunter-fees</td><td><span class="tag warn">请到来源模块维护</span></td></tr>
+                <tr><td>背调费用录入</td><td>背调费</td><td>需管理员授权</td><td>/background-check-costs</td><td><span class="tag warn">请到来源模块维护</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="analytics">
+        <div class="section-title">
+          <div>
+            <h2>招聘数据分析 / Recruiting Analytics</h2>
+            <p>仅展示 Moka 聚合分析数据，不拉普通候选人姓名、薪资、简历等敏感明细。</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <h3>招聘漏斗</h3>
+            <div class="bars">
+              <div class="bar-row"><span>简历</span><div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div><b>1200</b></div>
+              <div class="bar-row"><span>初筛</span><div class="bar-bg"><div class="bar-fill" style="width:72%"></div></div><b>860</b></div>
+              <div class="bar-row"><span>面试</span><div class="bar-bg"><div class="bar-fill" style="width:38%"></div></div><b>456</b></div>
+              <div class="bar-row"><span>Offer</span><div class="bar-bg"><div class="bar-fill" style="width:12%"></div></div><b>144</b></div>
+              <div class="bar-row"><span>入职</span><div class="bar-bg"><div class="bar-fill" style="width:8%"></div></div><b>96</b></div>
+            </div>
+          </div>
+          <div class="card span-6">
+            <h3>岗位招聘进度</h3>
+            <table>
+              <thead><tr><th>岗位</th><th>HC</th><th>已入职</th><th>Offer中</th><th>风险</th></tr></thead>
+              <tbody>
+                <tr><td>AI Engineer</td><td>5</td><td>3</td><td>1</td><td><span class="tag warn">关注</span></td></tr>
+                <tr><td>HRBP</td><td>2</td><td>2</td><td>0</td><td><span class="tag ok">正常</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="reminders">
+        <div class="section-title">
+          <div>
+            <h2>提醒中心</h2>
+            <p>付款提醒只来自未付款项目；合同到期提醒不受付款状态影响。</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-12">
+            <details open>
+              <summary>付款提醒</summary>
+              <table>
+                <thead><tr><th>类型</th><th>事项</th><th>负责人</th><th>到期/付款日</th><th>操作</th><th>反馈</th></tr></thead>
+                <tbody>
+                  <tr><td>招聘渠道费</td><td>Boss 直聘渠道费未付款</td><td>Recruiter A</td><td>2026-07-01</td><td><button class="btn secondary">发送提醒</button></td><td><span class="red-dot"></span>有确认反馈</td></tr>
+                  <tr><td>猎头费</td><td>Alpha Search 第二笔付款</td><td>Terence</td><td>2026-07-05</td><td><button class="btn secondary">发送提醒</button></td><td>-</td></tr>
+                  <tr><td>背调费</td><td>CheckPro 背调费用未付款</td><td>HR Ops</td><td>2026-06-28</td><td><button class="btn secondary">发送提醒</button></td><td>-</td></tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>合同到期提醒</summary>
+              <p class="muted">脉脉渠道合同 2026-07-15 到期；Alpha Search 合同 2026-08-01 到期。</p>
+            </details>
+            <details>
+              <summary>其他待处理</summary>
+              <p class="muted">文件识别待确认、PendingChange 待确认、保证期/保护期提醒默认收起。</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="files">
+        <div class="section-title">
+          <div>
+            <h2>文件中心</h2>
+            <p>统一文件记录、历史追溯和 PendingChange 总览；页面级上传也应先生成待确认变更。</p>
+          </div>
+        </div>
+        <div class="notice">文件上传不会直接覆盖业务数据；识别结果进入 PendingChange，人工确认后才同步到对应模块。付款状态仍由人工维护。</div>
+      </section>
+
+      <section id="contracts">
+        <div class="section-title">
+          <div>
+            <h2>合同管理</h2>
+            <p>不提供上传入口，只展示文件中心识别出的合同；合同不能自动决定付款状态。</p>
+          </div>
+        </div>
+        <div class="card">
+          <table>
+            <thead><tr><th>合同分类</th><th>合同名称</th><th>关联对象</th><th>到期日</th><th>提醒</th></tr></thead>
+            <tbody>
+              <tr><td>招聘渠道合同</td><td>脉脉年度套餐</td><td>脉脉</td><td>2026-07-15</td><td><span class="tag warn">合同到期提醒</span></td></tr>
+              <tr><td>猎头合同</td><td>Alpha Search 服务协议</td><td>Alpha Search</td><td>2026-08-01</td><td><span class="tag warn">合同到期提醒</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="settings">
+        <div class="section-title">
+          <div>
+            <h2>系统设置</h2>
+            <p>包含语言切换和 Moka 同步设置 mock。</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <h3>语言设置</h3>
+            <select><option>zh-CN</option><option>en-US</option></select>
+          </div>
+          <div class="card span-6">
+            <h3>Moka 同步设置</h3>
+            <p class="muted">当前为前端 mock。后续真实接入只同步聚合招聘分析数据，不拉普通候选人姓名、薪资、简历。</p>
+            <div class="toolbar" style="justify-content:flex-start">
+              <button class="btn">手动同步</button>
+              <select><option>自动同步：每天</option><option>每周</option><option>每月</option></select>
+              <input class="small-input" type="time" value="09:00">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="flow">
+        <div class="section-title">
+          <div>
+            <h2>核心数据链路</h2>
+            <p>用于排查“数据是否映射、模块是否连贯、操作是否合理”。</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="flow">
+            <div><b>招聘渠道文件</b><br>上传报价/合同<br><span class="arrow">→ PendingChange</span></div>
+            <div><b>渠道管理</b><br>确认后更新渠道费、合同到期、付款状态<br><span class="arrow">→ 成本汇总</span></div>
+            <div><b>招聘成本分析</b><br>只读汇总，不维护付款状态<br><span class="arrow">→ 提醒</span></div>
+            <div><b>提醒中心</b><br>未付款进入付款提醒；快到期进入合同提醒</div>
+            <div><b>设置</b><br>Moka 同步总控，不在每页重复复杂按钮</div>
+          </div>
+          <br>
+          <div class="flow">
+            <div><b>Moka 聚合数据</b><br>漏斗、渠道转化、岗位进度</div>
+            <div><b>招聘数据分析</b><br>不展示普通候选人敏感明细</div>
+            <div><b>猎头 Offer 匹配</b><br>仅猎头推荐且涉及费用</div>
+            <div><b>PendingChange</b><br>人工确认后进入猎头费明细</div>
+            <div><b>猎头费管理</b><br>人工维护是否付款</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
