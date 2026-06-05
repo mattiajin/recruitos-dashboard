@@ -4,6 +4,8 @@
 
 静态单页原型，可直接部署到 GitHub Pages 或任意静态托管。
 
+> 本目录为独立 Git 仓库，位于工作区 `mini_exploration/recruitos-dashboard/`。
+
 ## 在线预览
 
 部署完成后访问：
